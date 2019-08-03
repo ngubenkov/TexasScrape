@@ -16,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="40" column="26" lean-forward="true" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+            <state relative-caret-position="110">
+              <caret line="49" column="160" selection-start-line="49" selection-start-column="160" selection-end-line="49" selection-end-column="160" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -161,7 +161,7 @@
       <option name="presentableId" value="Default" />
       <updated>1564676200440</updated>
       <workItem from="1564676204142" duration="4007000" />
-      <workItem from="1564814146602" duration="5490000" />
+      <workItem from="1564814146602" duration="7004000" />
     </task>
     <task id="LOCAL-00001" summary="drivers are addded and example(mb useful) code">
       <created>1564773528122</created>
@@ -170,11 +170,25 @@
       <option name="project" value="LOCAL" />
       <updated>1564773528122</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="optimization has been done(using xpath instead of previous)">
+      <created>1564850637271</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1564850637271</updated>
+    </task>
+    <task id="LOCAL-00003" summary="can find country">
+      <created>1564851622267</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1564851622267</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9497000" />
+    <option name="totallyTimeSpent" value="11011000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1440" height="793" extended-state="0" />
@@ -208,10 +222,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="drivers are addded and example(mb useful) code" />
-    <option name="LAST_COMMIT_MESSAGE" value="drivers are addded and example(mb useful) code" />
+    <MESSAGE value="optimization has been done(using xpath instead of previous)" />
+    <MESSAGE value="can find country" />
+    <option name="LAST_COMMIT_MESSAGE" value="can find country" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TexasScrape$main.coverage" NAME="main Coverage Results" MODIFIED="1564850590246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TexasScrape$main.coverage" NAME="main Coverage Results" MODIFIED="1564854703198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/test.py">
@@ -226,8 +242,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="40" column="26" lean-forward="true" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+        <state relative-caret-position="110">
+          <caret line="49" column="160" selection-start-line="49" selection-start-column="160" selection-end-line="49" selection-end-column="160" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>

@@ -47,8 +47,7 @@ def inputData(browser,country=None, block=None, section=None):
     ''' [ dijitReset ] is drop down element contains all counties
       path should be somethin like :   [ dijitReset ] / [dijitReset dijitMenuItem] / [dijitReset dijitMenuItemLabel] [ inner HTML ]
     '''
-    select_countries = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="countySelect"]/tbody/tr/td[2]/div[1]')))
-    select_countries.click()
+    WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="countySelect"]/tbody/tr/td[2]/div[1]'))).click() # select countries btn
     items = WebDriverWait(browser, 20).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'dijitMenuItemLabel'))) # list of drop down items
     for _ in items:
         #print(_.get_attribute('innerHTML'))
@@ -56,6 +55,12 @@ def inputData(browser,country=None, block=None, section=None):
             print("FAMUTON")
             print(_.get_attribute('innerHTML'))
             _.click()
+
+    WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "blockID"]'))).send_keys('37 T2N') # Block
+
+    WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "sectionID"]'))).send_keys('36') # Section
+
+    WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "querySurveyButton_label"]'))).click() # Query button
 
 
 
