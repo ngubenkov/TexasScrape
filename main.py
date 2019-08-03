@@ -43,7 +43,6 @@ def open_page(url):
     except Exception as e:
         print(e)
 
-
 def inputData(browser,country=None, block=None, section=None):
     ''' [ dijitReset ] is drop down element contains all counties
       path should be somethin like :   [ dijitReset ] / [dijitReset dijitMenuItem] / [dijitReset dijitMenuItemLabel] [ inner HTML ]
@@ -52,9 +51,18 @@ def inputData(browser,country=None, block=None, section=None):
     select_countries.click()
     items = WebDriverWait(browser, 20).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'dijitMenuItemLabel'))) # list of drop down items
     for _ in items:
-        print(_.get_attribute('innerHTML'))
+        #print(_.get_attribute('innerHTML'))
+        if 'MARTIN' in _.get_attribute('innerHTML'):
+            print("FAMUTON")
+            print(_.get_attribute('innerHTML'))
+            _.click()
 
 
 
 if __name__ == '__main__':
+    '''
+    test input is : County: Martin, Block: 37 T2N, Section: 36
+
+    '''
     open_page("http://wwwgisp.rrc.texas.gov/GISViewer2/")
+
