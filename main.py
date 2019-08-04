@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+import pyscreenshot as ImageGrab
 
 '''
 https://medium.com/ymedialabs-innovation/web-scraping-using-beautiful-soup-and-selenium-for-dynamic-page-2f8ad15efe25
@@ -38,31 +39,37 @@ def open_page(url):
 
         btn_Survey = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="dijit_rrcGisAnchorMenuItem_7_text"]')))
         btn_Survey.click()
-        inputData(browser)
+        inputData(browser, 'MARTIN', '37 T2N', '36')
         input()
     except Exception as e:
         print(e)
 
-def inputData(browser,country=None, block=None, section=None):
-    ''' [ dijitReset ] is drop down element contains all counties
-      path should be somethin like :   [ dijitReset ] / [dijitReset dijitMenuItem] / [dijitReset dijitMenuItemLabel] [ inner HTML ]
+def inputData(browser,country, block, section):
+    '''
+
     '''
     WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="countySelect"]/tbody/tr/td[2]/div[1]'))).click() # select countries btn
     items = WebDriverWait(browser, 20).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'dijitMenuItemLabel'))) # list of drop down items
     for _ in items:
         #print(_.get_attribute('innerHTML'))
-        if 'MARTIN' in _.get_attribute('innerHTML'):
-            print("FAMUTON")
+        if country.upper() in _.get_attribute('innerHTML'):
+            print("found")
             print(_.get_attribute('innerHTML'))
             _.click()
 
-    WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "blockID"]'))).send_keys('37 T2N') # Block
-
-    WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "sectionID"]'))).send_keys('36') # Section
-
+    WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "blockID"]'))).send_keys(block) # Block
+    WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "sectionID"]'))).send_keys(section) # Section
     WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "querySurveyButton_label"]'))).click() # Query button
+    #WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="zoomCloseBtn"]/a/img'))).click() # close form
+
+    #TODO: close SURVEY SEARCH form and add delay to zoom at location
+    screenshot(country, block, section)
 
 
+def screenshot(country, block, section):
+    im = ImageGrab.grab()
+    im.save('screenshots/{}_{}_{}.png'.format(country, block, section))
+    im.show()
 
 if __name__ == '__main__':
     '''
