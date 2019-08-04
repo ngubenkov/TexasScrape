@@ -63,7 +63,8 @@ def inputData(browser,country, block, section):
     #WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="zoomCloseBtn"]/a/img'))).click() # close form
 
     #TODO: close SURVEY SEARCH form and add delay to zoom at location
-    screenshot(country, block, section)
+    # screenshot(country, block, section) #dont use it now
+
 
 
 def screenshot(country, block, section):
@@ -71,7 +72,15 @@ def screenshot(country, block, section):
     im.save('screenshots/{}_{}_{}.png'.format(country, block, section))
     im.show()
 
+def identifyWells():
+    '''
+    62B783 - color in selected area
+    60AE41 - outside of area
+
+    '''
+
 if __name__ == '__main__':
+
     '''
     test input is : County: Martin, Block: 37 T2N, Section: 36
 
