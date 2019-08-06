@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import pyscreenshot as ImageGrab
+from stage4 import OpenSecondPage
 
 '''
 https://medium.com/ymedialabs-innovation/web-scraping-using-beautiful-soup-and-selenium-for-dynamic-page-2f8ad15efe25
@@ -85,5 +86,6 @@ if __name__ == '__main__':
     test input is : County: Martin, Block: 37 T2N, Section: 36
 
     '''
-    open_page("http://wwwgisp.rrc.texas.gov/GISViewer2/")
+    #open_page("http://wwwgisp.rrc.texas.gov/GISViewer2/")
+    OpenSecondPage().open_second_page("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
 
