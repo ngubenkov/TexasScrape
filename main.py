@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import pyscreenshot as ImageGrab
-from stage4 import OpenSecondPage
+from stage3 import OpenSecondPage
 from bs4 import BeautifulSoup as BS
 
 '''
@@ -146,6 +146,6 @@ def step_4(url):
 if __name__ == '__main__':
     open_page("http://wwwgisp.rrc.texas.gov/GISViewer2/")
     #step_4("http://webapps.rrc.texas.gov/CMPL/publicSearchAction.do?formData.methodHndlr.inputValue =init&formData.headerTabSelected=home&formData.pageForwardHndlr.inputValue=home")
-   # open_second_page("​https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
+    #OpenSecondPage().open_second_page("​https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
 
 
