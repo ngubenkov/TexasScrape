@@ -17,7 +17,7 @@ class OpenSecondPage:
             prefs = {"download.default_directory": "/Users/korouf/Desktop/TEXAS"}
             chromeOptions.add_experimental_option("prefs", prefs)
 
-            browser = webdriver.Chrome(executable_path='/Users/korouf/Documents/TexasScrape/TexasScrape/files/chromedriver',
+            browser = webdriver.Chrome(executable_path='files/chromedriver',
                                        options=chromeOptions)  # fake Chrome browser mac
             #browser = webdriver.Safari(executable_path='/usr/bin/safaridriver')
             return browser
@@ -81,5 +81,9 @@ class OpenSecondPage:
             print(str(error))
             browser.quit()
 
-test = OpenSecondPage()
-test.open_second_page("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
+
+
+
+if __name__ == '__main__':
+    test = OpenSecondPage()
+    test.open_second_page("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
