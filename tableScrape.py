@@ -1,34 +1,43 @@
 import csv
-import pandas as pd
-
 from bs4 import BeautifulSoup as BS
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 
 def scrapeTable(htmlTable):
+    ''' Scrape html table object
+    input:
+    '''
     soup = BS(htmlTable, 'html.parser')
 
-    left_rows = [tr.findAll('th') for tr in soup.findAll('tr')[1:-1]]
-    right_rows = [tr.findAll('td') for tr in soup.findAll('tr')[1:-1]]
+    left_rows = [tr.findAll('th') for tr in soup.findAll('tr')[:]]
+    right_rows = [tr.findAll('td') for tr in soup.findAll('tr')[:]]
 
-    print((left_rows[0][0]).text)
-    title = left_rows[0][0].text
-    print(title)
-    left_rows = left_rows[1:]
+
+    # sometimes table has first row empty
+    if left_rows[0][0].text != "":
+        title = left_rows[0][0].text
+    else:
+        title = left_rows[1][0].text
+
     l = []
     r = []
 
     for i in left_rows:
-        l.append([i[0].text])
+        try:
+            l.append([i[0].text])
+        except IndexError as e:
+            l.append([""])
 
     for i in right_rows:
-        r.append([i[0].text])
+        try:
+            r.append([i[0].text])
+        except IndexError as e:
+            r.append([""])
+
+    title = title.replace('/', '_') # convert to proper name
 
     with open('{}.csv'.format(title), 'w') as writeFile:
-        for num, row in enumerate(right_rows, start=0):
+        for num, row in enumerate(l, start=0):
             writer = csv.writer(writeFile)
+            print(l[num][0] + " : " + r[num][0])
             writer.writerow([l[num][0], r[num][0]])
 
     writeFile.close()
