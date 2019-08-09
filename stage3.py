@@ -42,17 +42,21 @@ class OpenSecondPage:
             time.sleep(6)
 
             selection = Select(browser.find_element_by_xpath('//*[@id="selectSize"]'))
+            # select possibly all result if no other page
             selection.select_by_value('50')
+            # get table
             tableid = WebDriverWait(browser, 30).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="searchResults"]')))
-            tbody = tableid.find_element_by_tag_name('tbody')
-            result_list = tbody.find_elements(By.TAG_NAME,'tr')
+            tbody = tableid.find_element_by_tag_name('tbody') # get the body of the table
+            result_list = tbody.find_elements(By.TAG_NAME, 'tr') # get all the tr of the table above
             for index1, rows in enumerate(result_list):
                 col = rows.find_elements(By.TAG_NAME, 'td')
-                for index2 , row in enumerate(col):
-                    #print(col)
-                    if row and row.get_attribute('headers') == 'thprofile_type':
-                        print(row.get_attribute('innerHTML'))
+                for index2, row in enumerate(col):
+                    if row and row.get_attribute('headers') == 'thprofile_type' and \
+                            row.get_attribute('innerHTML') == 'POTENTIAL':
+                        print (tbody.get_attribute('innerHTML'))
+                        print(tbody.get_attribute('@data-docid'))
+                        print(tableid.find_elements(By.XPATH, '//*[@data-docid]')[0].get_attribute('innerHTML'))
 
             WebDriverWait(browser, 30)
             #print(element)
