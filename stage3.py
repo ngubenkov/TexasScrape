@@ -38,42 +38,26 @@ class OpenSecondPage:
             search = WebDriverWait(browser, 30).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="docSearchButton"]')))
             search.click()
-            #searchResultsPageSize //*[@id="selectSize"]
-            # selectmaximumresults = WebDriverWait(browser, 30).until(
-            #     EC.presence_of_element_located((By.XPATH, "//*[@id='searchResultsPageSize']")))
+
             time.sleep(6)
 
             selection = Select(browser.find_element_by_xpath('//*[@id="selectSize"]'))
+            # select possibly all result if no other page
             selection.select_by_value('50')
+            # get table
             tableid = WebDriverWait(browser, 30).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="searchResults"]')))
-            tbody = tableid.find_element_by_tag_name('tbody')
-            # // *[ @ id = "searchResults"] / tbody / tr[4] / td[10]
-            result_list = tableid.find_elements(By.TAG_NAME,'tr')
-            for index1, rows in enumerate(tbody.find_elements(By.TAG_NAME, 'tr')):
-                #col = rows.find_elements(By.TAG_NAME, 'td')
-                for index2 , row in enumerate(rows.find_elements(By.TAG_NAME, 'td')):
-                #print(col)
-                #if col.get_attribute('headers') == 'thprofile_type':
-                    if row:
-                #     print(col[1])
-                # print((index1,index2))
-                        print(row)
-                        col = tbody.find_elements(By.XPATH('//*[@id="searchResults"]/tbody/tr['+str(index1)+']/td['+str(index2)+']'))
-                        print(col)
-                #print(row.get_attribute('innerHtml'))
-            # soup = BS(tableid,'html.parser')
-            # right_rows = [tr.findAll('td') for tr in soup.findAll('tr')[:-1]]
-            # r = []
-            #
-            # for i in right_rows:
-            #     r.append([i[0].text])
-            # print(r)
-            #print(result_list)
-            # element = WebDriverWait(browser, 30).until(
-            #     EC.presence_of_element_located(
-            #         (By.XPATH, "//*[@id='searchResults']/tbody//td[contains(text(), 'POTENTIAL')]"))
-            # )
+            tbody = tableid.find_element_by_tag_name('tbody') # get the body of the table
+            result_list = tbody.find_elements(By.TAG_NAME, 'tr') # get all the tr of the table above
+            for index1, rows in enumerate(result_list):
+                col = rows.find_elements(By.TAG_NAME, 'td')
+                for index2, row in enumerate(col):
+                    if row and row.get_attribute('headers') == 'thprofile_type' and \
+                            row.get_attribute('innerHTML') == 'POTENTIAL':
+                        print (tbody.get_attribute('innerHTML'))
+                        print(tbody.get_attribute('@data-docid'))
+                        print(tableid.find_elements(By.XPATH, '//*[@data-docid]')[0].get_attribute('innerHTML'))
+
             WebDriverWait(browser, 30)
             #print(element)
             input()
