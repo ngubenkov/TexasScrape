@@ -71,3 +71,7 @@ class OpenSecondPage:
 if __name__ == '__main__':
     test = OpenSecondPage()
     test.open_second_page("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
+
+
+    '//*[@id="STANDARD_Zc4AGPmrB0s."]'
+    '//*[@id="STANDARD_SDlGy2DN744."]'

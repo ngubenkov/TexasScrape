@@ -19,13 +19,14 @@ def browser_setup():
     '''
     setup browser
     '''
-    chromeOptions = webdriver.ChromeOptions()
-    prefs = {"download.default_directory": "/Users/frozmannik/Desktop/TEXAS"}
-    chromeOptions.add_experimental_option("prefs", prefs)
+    download_dir = "/Users/frozmannik/PycharmProjects/TexasScrape/pdf"  # for linux/*nix, download_dir="/usr/Public"
+    options = webdriver.ChromeOptions()
 
-    browser = webdriver.Chrome(executable_path = 'files/chromedriver',
-                               chrome_options = chromeOptions)  # fake Chrome browser mac
-    # browser = webdriver.Chrome('C:\\Users\Frozm\PycharmProjects\\biologyScrapeData\\files\win\chromedriver.exe')
+    profile = {"plugins.plugins_list": [{"enabled": False, "name": "Chrome PDF Viewer"}],  # Disable Chrome's PDF Viewer
+               "download.default_directory": download_dir, "download.extensions_to_open": "applications/pdf"}
+    options.add_experimental_option("prefs", profile)
+    browser = webdriver.Chrome('files/chromedriver',
+                              chrome_options=options)  # Optional argument, if not specified will search path.
     return browser
 
 def open_page(url):
