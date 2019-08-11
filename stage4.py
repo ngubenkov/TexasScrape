@@ -25,31 +25,42 @@ def stage4(id):
     WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/table[6]/tbody/tr/td/form/table/tbody/tr[4]/td/table/tbody/tr[5]/td/table/tbody/tr/td/input[1]'))).click()
     #screenshot(id)
     recordsFoundLinks = scrapeTable(browser)
-    input()
+    for record in recordsFoundLinks:
+        details = scrapeDetails(browser, record)
+        for detail in details:
+            browser.get(detail[1])
+        print("click to go to next detail")
+        input()
 
 
 def scrapeTable(browser):
     table = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/table[6]/tbody/tr/td/form/table/tbody/tr[3]/td/table/tbody/tr[3]/td/table/tbody')))
     links = table.find_elements_by_tag_name('a')
     returnList = []
+
     for i in links[12:]:
         returnList.append(i.get_attribute("href"))
-        print(i.get_attribute("href"))
-
 
     return returnList
 
-def downloadDocs(browser,url):
+def scrapeDetails(browser, url):
     browser.get(url)
-    table = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/table[6]/tbody/tr/td/form/table/tbody/tr/td/table[2]/tbody/tr[2]/td[1]/table/tbody/tr[2]/td')))
-    urls = table.find_elements_by_tag_name('a')
+    table = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/table[6]/tbody/tr/td/form/table/tbody/tr/td/table[2]/tbody/tr[2]/td[1]/table/tbody/tr[2]/td/table/tbody')))
+    rows = table.find_elements_by_tag_name('tr')
+    attachments = []
 
-def downloadPDF(url, name):
+    for row in rows[1:]:
+        try:
+            url = row.find_element_by_tag_name('a').get_attribute('href')
+            name = row.find_element_by_tag_name('td').find_element_by_tag_name('div').get_attribute('innerHTML')
+            attachments.append([name, url])
+        except:
+            pass
 
+    return attachments
 
-    driver.get(url)
 
 if __name__ == '__main__':
     id = 35729
     stage4(id)
-    #downloadPDF('http://webapps.rrc.texas.gov/CMPL/viewPdfReportFormAction.do?method=cmplL1FormPdf&packetSummaryId=52821')
+

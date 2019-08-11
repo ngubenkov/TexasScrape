@@ -25,8 +25,7 @@ def browser_setup():
     profile = {"plugins.plugins_list": [{"enabled": False, "name": "Chrome PDF Viewer"}],  # Disable Chrome's PDF Viewer
                "download.default_directory": download_dir, "download.extensions_to_open": "applications/pdf"}
     options.add_experimental_option("prefs", profile)
-    browser = webdriver.Chrome('files/chromedriver',
-                              chrome_options=options)  # Optional argument, if not specified will search path.
+    browser = webdriver.Chrome('files/chromedriver',chrome_options=options)  # Optional argument, if not specified will search path.
     return browser
 
 def open_page(url):
