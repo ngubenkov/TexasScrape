@@ -59,7 +59,7 @@ class OpenSecondPage:
                         docid = tableid.find_elements(By.XPATH, '//*[@data-docid]')[index1].get_attribute("data-docid")
                         downloadid = 'STANDARD_'+str(docid)
                         download_ids.append(downloadid)
-                        result_list[index1].find_element(By.TAG_NAME, 'a').click()
+                        result_list[index1].find_elements(By.XPATH,"//a[@class='showActionMenu']")[0].click()
                         #// *[ @ id = "searchResults"] / tbody / tr[4] / td[1] / div[2] / a
                         # WebDriverWait(browser, 30).until(
                         #     EC.presence_of_element_located((By.XPATH, '//*[@id='+str(downloadid)+']'))).click()
