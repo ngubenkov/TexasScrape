@@ -1,13 +1,10 @@
-from requests import get
-from requests.exceptions import RequestException
-from contextlib import closing
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import pyscreenshot as ImageGrab
 from tableScrape import scrapeTable
+import time
 from bs4 import BeautifulSoup as BS
 import csv
 '''
@@ -35,54 +32,40 @@ def open_page(url):
     browser = browser_setup()
     browser.get(url)
     try:
-        btn_Magnifying_Glass = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcsearchButton"]')))
-        #print(btn_Magnifying_Glass)
-        btn_Magnifying_Glass.click() # opens search
+        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcsearchButton"]'))).click()
+        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="dijit_rrcGisAnchorMenuItem_7_text"]'))).click()
 
-        btn_Survey = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="dijit_rrcGisAnchorMenuItem_7_text"]')))
-        btn_Survey.click()
         inputData(browser, 'MARTIN', '37 T2N', '36')
-        print("Close form")
-        input()
+
         # identify wells
-        btn_Identify = WebDriverWait(browser, 20).until(
-            EC.presence_of_element_located((By.XPATH, '// *[ @ id = "identifyButton"] / span[1]')))
-        btn_Identify.click()
-        btn_Wells = WebDriverWait(browser, 20).until(
-            EC.presence_of_element_located((By.XPATH, '// *[ @ id = "dijit_rrcGisAnchorMenuItem_0_text"]')))
-        btn_Wells.click()
+        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "identifyButton"] / span[1]'))).click()
+        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "dijit_rrcGisAnchorMenuItem_0_text"]'))).click()
+
     except Exception as e:
         print(e)
-
 
     # click on well
     print("Click on well")
     input()
 
-
     # scrape tables
-    table1 = WebDriverWait(browser, 30).until(
-        EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[1]/tbody')))
+    table1 = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[1]/tbody')))
 
     contentOfTable1 = table1.get_attribute('innerHTML')
     scrapeTable(contentOfTable1)
     print("supposevly we have table 1")
 
-    table2 = WebDriverWait(browser, 30).until(
-        EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[3]/tbody')))
+    table2 = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[3]/tbody')))
     contentOfTable2 = table2.get_attribute('innerHTML')
     scrapeTable(contentOfTable2)
     print("supposevly we have table 2")
     input()
 
 def identifyWell(browser):
-    obj = WebDriverWait(browser, 20).until(
-        EC.presence_of_element_located((By.XPATH, '// *[ @ id = "printIdentifyWellDiv"] / table[2] / tbody')))
+    obj = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "printIdentifyWellDiv"] / table[2] / tbody')))
 
     print(obj)
-    #content =  # contents of that table
-   # soup = BS(content, 'html5lib')
-   # rows = [tr.findAll('td') for tr in soup.findAll('tr')]
+
 
 def inputData(browser,country, block, section):
     '''
@@ -90,6 +73,7 @@ def inputData(browser,country, block, section):
     '''
     WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="countySelect"]/tbody/tr/td[2]/div[1]'))).click() # select countries btn
     items = WebDriverWait(browser, 20).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'dijitMenuItemLabel'))) # list of drop down items
+
     for _ in items:
         if country.upper() in _.get_attribute('innerHTML'):
             _.click()
@@ -97,16 +81,14 @@ def inputData(browser,country, block, section):
     WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "blockID"]'))).send_keys(block) # Block
     WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "sectionID"]'))).send_keys(section) # Section
     WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "querySurveyButton_label"]'))).click() # Query button
-    #WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="zoomCloseBtn"]/a/img'))).click() # close form
-
-    #TODO: close SURVEY SEARCH form and add delay to zoom at location
-    # screenshot(country, block, section) #dont use it now
-
+    WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#fpSurveySearch #zoomCloseBtn a img'))).click()  # close form
+    time.sleep(5)
+    screenshot(country, block, section)  # dont use it now
 
 def screenshot(country, block, section):
     im = ImageGrab.grab()
     im.save('screenshots/{}_{}_{}.png'.format(country, block, section))
-    im.show()
+    #im.show()
 
 def identifyWells():
     '''
@@ -122,23 +104,15 @@ def open_second_page(url):
     browser = browser_setup()
     browser.get(url)
     try:
-        leaseID= WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="lease_numberTEXT"]')))
-        leaseID.send_keys("38582")
-        search = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="docSearchButton"]')))
-        search.click()
+        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="lease_numberTEXT"]'))).send_keys("38582")
+        WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="docSearchButton"]'))).click()
 
-        #// *[ @ id = "searchResults"] / tbody / tr[4] / td[10]
-
-        element = WebDriverWait(browser, 30).until(
-            EC.presence_of_element_located(
-                (By.XPATH, "//*[@id='searchResults']/tbody//td[contains(text(), 'POTENTIAL')]")))
+        element = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='searchResults']/tbody//td[contains(text(), 'POTENTIAL')]")))
         WebDriverWait(browser, 30)
         print(element)
         input()
     except Exception as error:
         print(str(error))
-
-
 
 
 def step_4(url):
