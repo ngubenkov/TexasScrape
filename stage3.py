@@ -49,15 +49,21 @@ class OpenSecondPage:
                 EC.presence_of_element_located((By.XPATH, '//*[@id="searchResults"]')))
             tbody = tableid.find_element_by_tag_name('tbody') # get the body of the table
             result_list = tbody.find_elements(By.TAG_NAME, 'tr') # get all the tr of the table above
+            download_ids = []
             for index1, rows in enumerate(result_list):
                 col = rows.find_elements(By.TAG_NAME, 'td')
                 for index2, row in enumerate(col):
                     if row and row.get_attribute('headers') == 'thprofile_type' and \
                             row.get_attribute('innerHTML') == 'POTENTIAL':
-                        print (tbody.get_attribute('innerHTML'))
-                        print(tbody.get_attribute('@data-docid'))
-                        print(tableid.find_elements(By.XPATH, '//*[@data-docid]')[0].get_attribute('innerHTML'))
-
+                        print (result_list[index1].get_attribute('innerHTML'))
+                        docid = tableid.find_elements(By.XPATH, '//*[@data-docid]')[index1].get_attribute("data-docid")
+                        downloadid = 'STANDARD_'+str(docid)
+                        download_ids.append(downloadid)
+                        result_list[index1].find_elements(By.XPATH,"//a[@class='showActionMenu']")[0].click()
+                        #// *[ @ id = "searchResults"] / tbody / tr[4] / td[1] / div[2] / a
+                        # WebDriverWait(browser, 30).until(
+                        #     EC.presence_of_element_located((By.XPATH, '//*[@id='+str(downloadid)+']'))).click()
+            print(download_ids)
             WebDriverWait(browser, 30)
             #print(element)
             input()
