@@ -1,17 +1,10 @@
 from main import browser_setup
-from requests import get
-from requests.exceptions import RequestException
-from contextlib import closing
-from bs4 import BeautifulSoup
-from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
 import pyscreenshot as ImageGrab
 from tableScrape import scrapeTable
 from bs4 import BeautifulSoup as BS
-import csv
 
 def screenshot(id):
     im = ImageGrab.grab()

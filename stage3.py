@@ -45,6 +45,22 @@ class OpenSecondPage:
             # select possibly all result if no other page
             selection.select_by_value('50')
             # get table
+            time.sleep(5)
+            tableid = WebDriverWait(browser, 30).until(
+                EC.presence_of_element_located((By.XPATH, '//*[@id="searchResults"]')))
+
+            action_buttons = tableid.find_elements(By.CLASS_NAME, 'showActionMenu') # find 16 elements( i guess each 4 elements belongs to 1 action button, so (0,1,2,3) are belongs to action button 1
+
+
+            for button in action_buttons:
+                try:
+                    button.click()
+                    input()
+                except:
+                    print("NOT CORRECT")
+
+
+            ''' 
             tableid = WebDriverWait(browser, 30).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="searchResults"]')))
             tbody = tableid.find_element_by_tag_name('tbody') # get the body of the table
@@ -66,10 +82,12 @@ class OpenSecondPage:
             print(download_ids)
             WebDriverWait(browser, 30)
             #print(element)
+            '''
             input()
         except Exception as error:
             print(str(error))
-            browser.quit()
+            input()
+            #browser.quit()
 
 
 
