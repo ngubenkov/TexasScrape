@@ -40,7 +40,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
+            <state relative-caret-position="603">
               <caret line="121" selection-start-line="121" selection-end-line="121" />
               <folding>
                 <element signature="e#1#31#0" expanded="true" />
@@ -319,7 +319,7 @@
       <workItem from="1564814146602" duration="31510000" />
       <workItem from="1565358417957" duration="11354000" />
       <workItem from="1565634441465" duration="2081000" />
-      <workItem from="1565718156505" duration="944000" />
+      <workItem from="1565718156505" duration="1127000" />
     </task>
     <task id="LOCAL-00001" summary="drivers are addded and example(mb useful) code">
       <created>1564773528122</created>
@@ -395,18 +395,17 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49896000" />
+    <option name="totallyTimeSpent" value="50079000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3118741" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3118741" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32859176" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4990177" visible="true" weight="0.36024097" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4990177" weight="0.36024097" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997155" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -415,7 +414,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4990177" weight="0.32859176" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50098234" side_tool="true" weight="0.32859176" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4990177" weight="0.19397591" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4990177" visible="true" weight="0.19397591" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
@@ -553,7 +552,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
+        <state relative-caret-position="603">
           <caret line="121" selection-start-line="121" selection-end-line="121" />
           <folding>
             <element signature="e#1#31#0" expanded="true" />
