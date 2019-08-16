@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import pyscreenshot as ImageGrab
 from tableScrape import scrapeTable
 import time
+from selenium.webdriver.common.action_chains import ActionChains
 from bs4 import BeautifulSoup as BS
 import csv
 '''
@@ -25,18 +26,18 @@ def browser_setup():
     browser = webdriver.Chrome('files/chromedriver',chrome_options=options)  # Optional argument, if not specified will search path.
     return browser
 
-def open_page(url):
+def open_page(country, block, section):
     '''
     open browser and click
     '''
+    url = "http://wwwgisp.rrc.texas.gov/GISViewer2/"
     browser = browser_setup()
     browser.get(url)
     try:
         WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcsearchButton"]'))).click()
         WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="dijit_rrcGisAnchorMenuItem_7_text"]'))).click()
 
-        inputData(browser, 'MARTIN', '37 T2N', '36')
-
+        inputData(browser, country, block, section)
         # identify wells
         WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "identifyButton"] / span[1]'))).click()
         WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "dijit_rrcGisAnchorMenuItem_0_text"]'))).click()
@@ -47,7 +48,7 @@ def open_page(url):
     # click on well
     print("Click on well")
     input()
-
+    hoverBtns(browser)
     # scrape tables
     table1 = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[1]/tbody')))
 
@@ -60,12 +61,6 @@ def open_page(url):
     scrapeTable(contentOfTable2)
     print("supposevly we have table 2")
     input()
-
-def identifyWell(browser):
-    obj = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "printIdentifyWellDiv"] / table[2] / tbody')))
-
-    print(obj)
-
 
 def inputData(browser,country, block, section):
     '''
@@ -90,13 +85,6 @@ def screenshot(country, block, section):
     im.save('screenshots/{}_{}_{}.png'.format(country, block, section))
     #im.show()
 
-def identifyWells():
-    '''
-    62B783 - color in selected area
-    60AE41 - outside of area
-
-    '''
-
 def open_second_page(url):
     '''
     STEP 3 (doesn't work)
@@ -120,8 +108,38 @@ def step_4(url):
     browser.get(url)
 
 
+def hoverBtns(browser):
+    images = browser.find_elements_by_tag_name('image')
+    print("In hoverBtns")
+    for image in images:
+        try:
+            hover = ActionChains(browser).move_to_element(image)
+            hover.perform()
+            time.sleep(3)
+            descriptionForm = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
+            print("POP UP")
+            print(descriptionForm)
+            br = descriptionForm.find_element(By.CLASS_NAME,"dijitTooltipFocusNode")
+            print(len(br))
+            for _ in br:
+                print(_.get_attribute('innerHTML'))
+
+
+            print("Continue")
+            input()
+        except:
+            print("shit happened")
+            pass
+
+
+
 if __name__ == '__main__':
-    open_page("http://wwwgisp.rrc.texas.gov/GISViewer2/")
+    open_page('MARTIN', '37 T2N', '36')
     #step_4("http://webapps.rrc.texas.gov/CMPL/publicSearchAction.do?formData.methodHndlr.inputValue =init&formData.headerTabSelected=home&formData.pageForwardHndlr.inputValue=home")
     #OpenSecondPage().open_second_page("​https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
+
+
+
+'M 348,535 331,540 294,395 294,395 230,145 248,140 362,109 362,109 631,35 730,395 730,395 738,424 348,535'
+'M 348 535 331 540 294 395 294 395 230 145 248 140 362 109 362 109 631 35 730 395 730 395 738 424 348 535'
 
