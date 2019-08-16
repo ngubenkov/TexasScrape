@@ -45,22 +45,11 @@ def open_page(country, block, section):
     except Exception as e:
         print(e)
 
-    # click on well
-    print("Click on well")
-    input()
+
+
     hoverBtns(browser)
     # scrape tables
-    table1 = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[1]/tbody')))
 
-    contentOfTable1 = table1.get_attribute('innerHTML')
-    scrapeTable(contentOfTable1)
-    print("supposevly we have table 1")
-
-    table2 = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[3]/tbody')))
-    contentOfTable2 = table2.get_attribute('innerHTML')
-    scrapeTable(contentOfTable2)
-    print("supposevly we have table 2")
-    input()
 
 def inputData(browser,country, block, section):
     '''
@@ -109,29 +98,47 @@ def step_4(url):
 
 
 def hoverBtns(browser):
-    images = browser.find_elements_by_tag_name('image')
-    print("In hoverBtns")
-    for image in images:
+    '''
+    go throw all well on the map
+    hover each btn
+    :param browser:
+    :return:
+    '''
+    wellMap = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.XPATH,'//*[@id="rrcGisViewerMap"]')))
+    wellimages = wellMap.find_elements_by_tag_name('image')
+    for image in wellimages:
         try:
             hover = ActionChains(browser).move_to_element(image)
             hover.perform()
-            time.sleep(3)
-            descriptionForm = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
-            print("POP UP")
-            print(descriptionForm)
+            time.sleep(1)
+            descriptionForm = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
             br = descriptionForm.find_element(By.CLASS_NAME,"dijitTooltipFocusNode")
-            print(len(br))
-            for _ in br:
-                print(_.get_attribute('innerHTML'))
-
-
-            print("Continue")
-            input()
+            if 'WOODY "36"' in br.text:
+                print("FOUND")
+                image.click()
+                scrapePopUp(browser)
+                input()
         except:
             print("shit happened")
             pass
 
+def scrapePopUp(browser):
+    table1 = WebDriverWait(browser, 30).until(
+        EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[1]/tbody')))
 
+    contentOfTable1 = table1.get_attribute('innerHTML')
+    scrapeTable(contentOfTable1)
+
+
+    table2 = WebDriverWait(browser, 30).until(
+        EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[3]/tbody')))
+    contentOfTable2 = table2.get_attribute('innerHTML')
+    scrapeTable(contentOfTable2)
+
+    WebDriverWait(browser, 30).until(
+        EC.presence_of_element_located((By.XPATH,'//*[@id="rrcGisViewerMap_root"]/div[3]/div[1]/div[1]/div/div[6]'))).click()
+
+    input()
 
 if __name__ == '__main__':
     open_page('MARTIN', '37 T2N', '36')
