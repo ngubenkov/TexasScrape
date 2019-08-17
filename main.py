@@ -45,15 +45,12 @@ def open_page(country, block, section):
     except Exception as e:
         print(e)
 
-
-
-    hoverBtns(browser)
-    # scrape tables
+    hoverBtns(browser,section)
 
 
 def inputData(browser,country, block, section):
     '''
-
+    input data in search
     '''
     WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="countySelect"]/tbody/tr/td[2]/div[1]'))).click() # select countries btn
     items = WebDriverWait(browser, 20).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'dijitMenuItemLabel'))) # list of drop down items
@@ -72,7 +69,6 @@ def inputData(browser,country, block, section):
 def screenshot(country, block, section):
     im = ImageGrab.grab()
     im.save('screenshots/{}_{}_{}.png'.format(country, block, section))
-    #im.show()
 
 def open_second_page(url):
     '''
@@ -91,13 +87,7 @@ def open_second_page(url):
     except Exception as error:
         print(str(error))
 
-
-def step_4(url):
-    browser = browser_setup()
-    browser.get(url)
-
-
-def hoverBtns(browser):
+def hoverBtns(browser,section):
     '''
     go throw all well on the map
     hover each btn
@@ -106,47 +96,48 @@ def hoverBtns(browser):
     '''
     wellMap = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.XPATH,'//*[@id="rrcGisViewerMap"]')))
     wellimages = wellMap.find_elements_by_tag_name('image')
+    wells = 0
+
     for image in wellimages:
         try:
             hover = ActionChains(browser).move_to_element(image)
             hover.perform()
             time.sleep(1)
-            descriptionForm = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
+            descriptionForm = WebDriverWait(browser, 2).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
             br = descriptionForm.find_element(By.CLASS_NAME,"dijitTooltipFocusNode")
-            if 'WOODY "36"' in br.text:
-                print("FOUND")
+            if '"{}"'.format(section) in br.text[br.text.find('Lease Name :'):br.text.find('On Schedule :')]:
+                print("FOUND ")
+                wells += 1
                 image.click()
+                time.sleep(3)
                 scrapePopUp(browser)
-                input()
+
         except:
-            print("shit happened")
+            print(" Acceptable shit happened")
             pass
+    print("TOTAL WELLS {}".format(wells))
 
 def scrapePopUp(browser):
-    table1 = WebDriverWait(browser, 30).until(
-        EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[1]/tbody')))
+    tbodys = WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'esriPopupWrapper'))).find_elements_by_tag_name('tbody')
+    print("FOUND POP UP ")
+    count = 0
+    for item in tbodys:
+        count += 1
+        try:
+            tableContent = item.get_attribute('innerHTML')
+            scrapeTable(tableContent)
+            print("TABLE SCRAPED SUCCESSFULLY {}".format(count))
+        except:
+            print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {}".format(count))
 
-    contentOfTable1 = table1.get_attribute('innerHTML')
-    scrapeTable(contentOfTable1)
+    WebDriverWait(browser, 10).until(  # close form
+        EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="rrcGisViewerMap_root"]/div[3]/div[1]/div[1]/div/div[6]'))).click()
 
-
-    table2 = WebDriverWait(browser, 30).until(
-        EC.presence_of_element_located((By.XPATH, '//*[@id="printIdentifyWellDiv"]/table[3]/tbody')))
-    contentOfTable2 = table2.get_attribute('innerHTML')
-    scrapeTable(contentOfTable2)
-
-    WebDriverWait(browser, 30).until(
-        EC.presence_of_element_located((By.XPATH,'//*[@id="rrcGisViewerMap_root"]/div[3]/div[1]/div[1]/div/div[6]'))).click()
-
-    input()
 
 if __name__ == '__main__':
     open_page('MARTIN', '37 T2N', '36')
     #step_4("http://webapps.rrc.texas.gov/CMPL/publicSearchAction.do?formData.methodHndlr.inputValue =init&formData.headerTabSelected=home&formData.pageForwardHndlr.inputValue=home")
     #OpenSecondPage().open_second_page("​https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
-
-
-
-'M 348,535 331,540 294,395 294,395 230,145 248,140 362,109 362,109 631,35 730,395 730,395 738,424 348,535'
-'M 348 535 331 540 294 395 294 395 230 145 248 140 362 109 362 109 631 35 730 395 730 395 738 424 348 535'
 

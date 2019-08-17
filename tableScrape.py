@@ -37,7 +37,7 @@ def scrapeTable(htmlTable):
     with open('{}.csv'.format(title), 'w') as writeFile:
         for num, row in enumerate(l, start=0):
             writer = csv.writer(writeFile)
-            print(l[num][0] + " : " + r[num][0])
+            #print(l[num][0] + " : " + r[num][0])
             writer.writerow([l[num][0], r[num][0]])
 
     writeFile.close()
