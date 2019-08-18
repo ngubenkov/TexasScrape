@@ -110,14 +110,14 @@ def hoverBtns(browser,section):
                 wells += 1
                 image.click()
                 time.sleep(3)
-                scrapePopUp(browser)
+                scrapePopUp(browser,image)
 
         except:
             print(" Acceptable shit happened")
             pass
     print("TOTAL WELLS {}".format(wells))
 
-def scrapePopUp(browser):
+def scrapePopUp(browser,image):
     tbodys = WebDriverWait(browser, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'esriPopupWrapper'))).find_elements_by_tag_name('tbody')
     print("FOUND POP UP ")
@@ -131,9 +131,17 @@ def scrapePopUp(browser):
         except:
             print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {}".format(count))
 
-    WebDriverWait(browser, 10).until(  # close form
-        EC.presence_of_element_located(
-            (By.XPATH, '//*[@id="rrcGisViewerMap_root"]/div[3]/div[1]/div[1]/div/div[6]'))).click()
+    while True:
+        try:
+            WebDriverWait(browser, 10).until(  # close form
+                EC.presence_of_element_located(
+                    (By.XPATH, '//*[@id="rrcGisViewerMap_root"]/div[3]/div[1]/div[1]/div/div[6]'))).click()
+            break
+        except:
+            print("cant close pop up (PROBABLY MOVE MOUSE A BIT)")
+            ac = ActionChains(browser)
+            ac.move_to_element(image).move_by_offset(5, 5).click().perform()
+            break
 
 
 if __name__ == '__main__':
