@@ -13,6 +13,10 @@ https://medium.com/ymedialabs-innovation/web-scraping-using-beautiful-soup-and-s
 
 selenium + beautifulsoup because it dynamic page
 '''
+
+
+# TODO: save leaseID in list
+leaseID = []
 def browser_setup():
     '''
     setup browser
