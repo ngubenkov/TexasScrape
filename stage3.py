@@ -45,6 +45,7 @@ class OpenSecondPage:
             # select possibly all result if no other page
             selection.select_by_value('50')
             # get table
+            time.sleep(5)
             tableid = WebDriverWait(browser, 30).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="searchResults"]')))
             tbody = tableid.find_element_by_tag_name('tbody') # get the body of the table
@@ -55,17 +56,28 @@ class OpenSecondPage:
                 for index2, row in enumerate(col):
                     if row and row.get_attribute('headers') == 'thprofile_type' and \
                             row.get_attribute('innerHTML') == 'POTENTIAL':
-                        print (result_list[index1].get_attribute('innerHTML'))
+                        # get the correct id
                         docid = tableid.find_elements(By.XPATH, '//*[@data-docid]')[index1].get_attribute("data-docid")
                         downloadid = 'STANDARD_'+str(docid)
                         download_ids.append(downloadid)
-                        result_list[index1].find_elements(By.XPATH,"//a[@class='showActionMenu']")[0].click()
-                        #// *[ @ id = "searchResults"] / tbody / tr[4] / td[1] / div[2] / a
-                        # WebDriverWait(browser, 30).until(
-                        #     EC.presence_of_element_located((By.XPATH, '//*[@id='+str(downloadid)+']'))).click()
+                        action_menu_lst = result_list[index1].find_element(By.CLASS_NAME, 'showActionMenu')
+                        # click to open menu
+                        action_menu_lst.click()
+                        time.sleep(4)
+                        # get  to the download page
+                        WebDriverWait(browser, 30).until(
+                            EC.presence_of_element_located((By.ID, downloadid))).click()
+                        download_button = WebDriverWait(browser, 30).until(
+                            EC.presence_of_element_located((By.ID, 'downloadMenuButton'))).click()
+                        time.sleep(3)
+                        WebDriverWait(browser, 30).until(
+                            EC.presence_of_element_located((By.ID, 'downloadAllButton'))).click()
+                        time.sleep(3)
+                        WebDriverWait(browser, 30).until(
+                            EC.presence_of_element_located((By.ID, 'closeDoc2'))).click()
+                        time.sleep(2)
             print(download_ids)
             WebDriverWait(browser, 30)
-            #print(element)
             input()
         except Exception as error:
             print(str(error))
