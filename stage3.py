@@ -4,29 +4,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support import expected_conditions as EC
 import time
-from bs4 import BeautifulSoup as BS
-import pyscreenshot as ImageGrab
+from main import browser_setup
+
+DEFAULT_DOWNLOAD_DIRECTORY='/Users/korouf/Desktop/TEXAS'
+EXECUTABLE_PATH = '/Users/korouf/Documents/TexasScrape/TexasScrape/files/chromedriver'
+
 
 class OpenSecondPage:
-    def browser_setup(self):
-        '''
-        setup browser
-        '''
-        try:
-            chromeOptions = webdriver.ChromeOptions()
-            prefs = {"download.default_directory": "/Users/korouf/Desktop/TEXAS"}
-            chromeOptions.add_experimental_option("prefs", prefs)
-
-            browser = webdriver.Chrome(executable_path='/Users/korouf/Documents/TexasScrape/TexasScrape/files/chromedriver',
-                                       options=chromeOptions)  # fake Chrome browser mac
-            #browser = webdriver.Safari(executable_path='/usr/bin/safaridriver')
-            return browser
-        except Exception as e:
-            print(str(e))
-
 
     def open_second_page(self, url):
-        browser = self.browser_setup()
+        browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY, EXECUTABLE_PATH)
         try:
             browser.get(url)
         except Exception as err:

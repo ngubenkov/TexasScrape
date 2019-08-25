@@ -9,21 +9,22 @@ from selenium.webdriver.support import expected_conditions as EC
 import pyscreenshot as ImageGrab
 from stage3 import OpenSecondPage
 from bs4 import BeautifulSoup as BS
-
+DEFAULT_DOWNLOAD_DIRECTORY='/Users/frozmannik/Desktop/TEXAS'
+EXECUTABLE_PATH = '/Users/frozmannik/PycharmProjects/TexasScrape/files/chromedriver'
 '''
 https://medium.com/ymedialabs-innovation/web-scraping-using-beautiful-soup-and-selenium-for-dynamic-page-2f8ad15efe25
 
 selenium + beautifulsoup because it dynamic page
 '''
-def browser_setup():
+def browser_setup(download_path, executable_path):
     '''
     setup browser
     '''
     chromeOptions = webdriver.ChromeOptions()
-    prefs = {"download.default_directory": "/Users/frozmannik/Desktop/TEXAS"}
+    prefs = {"download.default_directory": download_path }
     chromeOptions.add_experimental_option("prefs", prefs)
 
-    browser = webdriver.Chrome(executable_path = '/Users/frozmannik/PycharmProjects/TexasScrape/files/chromedriver',
+    browser = webdriver.Chrome(executable_path = executable_path,
                                chrome_options = chromeOptions)  # fake Chrome browser mac
     # browser = webdriver.Chrome('C:\\Users\Frozm\PycharmProjects\\biologyScrapeData\\files\win\chromedriver.exe')
     return browser
@@ -117,7 +118,7 @@ def open_second_page(url):
     '''
     STEP 3 (doesn't work)
     '''
-    browser = browser_setup()
+    browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY, EXECUTABLE_PATH)
     browser.get(url)
     try:
         leaseID= WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="lease_numberTEXT"]')))
@@ -139,7 +140,7 @@ def open_second_page(url):
 
 
 def step_4(url):
-    browser = browser_setup()
+    browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY, EXECUTABLE_PATH)
     browser.get(url)
 
 
