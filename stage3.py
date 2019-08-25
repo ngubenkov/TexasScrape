@@ -1,4 +1,3 @@
-from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
@@ -6,22 +5,23 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 from main import browser_setup
 
-DEFAULT_DOWNLOAD_DIRECTORY='/Users/korouf/Desktop/TEXAS'
-EXECUTABLE_PATH = '/Users/korouf/Documents/TexasScrape/TexasScrape/files/chromedriver'
+DEFAULT_DOWNLOAD_DIRECTORY = '/Users/korouf/Desktop/TEXAS'
 
 
 class OpenSecondPage:
+    def __init__(self, key):
+        self.key = key
 
-    def open_second_page(self, url):
-        browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY, EXECUTABLE_PATH)
+    def open_second_page(self):
+        browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY)
         try:
-            browser.get(url)
+            browser.get("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
         except Exception as err:
             print(str(err))
         try:  # docSearchButton
             leaseID = WebDriverWait(browser, 20).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="lease_numberTEXT"]')))
-            leaseID.send_keys("38582")
+            leaseID.send_keys(self.key)
             search = WebDriverWait(browser, 30).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="docSearchButton"]')))
             search.click()
@@ -70,5 +70,5 @@ class OpenSecondPage:
             print(str(error))
             browser.quit()
 
-test = OpenSecondPage()
-test.open_second_page("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
+# test = OpenSecondPage(38582)
+# test.open_second_page()
