@@ -20,11 +20,21 @@ def scrapeTable(htmlTable):
     l = []
     r = []
 
+    ind = 0
+    idInd = None
     for i in left_rows:
         try:
             l.append([i[0].text])
+            print(i[0].text)
+            if 'LEASE/ID' in i[0].text:
+                print("FOUND LEASE ID AT POSITION")
+                print(str(ind))
+                idInd = ind
         except IndexError as e:
             l.append([""])
+
+        ind += 1
+
 
     for i in right_rows:
         try:
@@ -32,8 +42,10 @@ def scrapeTable(htmlTable):
         except IndexError as e:
             r.append([""])
 
-    title = title.replace('/', '_') # convert to proper name
 
+
+    title = title.replace('/', '_') # convert to proper name
+    print("save file {}.csv".format(title))
     with open('{}.csv'.format(title), 'w') as writeFile:
         for num, row in enumerate(l, start=0):
             writer = csv.writer(writeFile)
@@ -43,7 +55,12 @@ def scrapeTable(htmlTable):
     writeFile.close()
 
 
+    try:
+        return str(r[idInd])
 
+    except:
+        print("CANNOT RETURN LEASE ID")
+        return None
 
 
 

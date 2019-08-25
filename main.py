@@ -14,9 +14,10 @@ https://medium.com/ymedialabs-innovation/web-scraping-using-beautiful-soup-and-s
 selenium + beautifulsoup because it dynamic page
 '''
 
+waiting = 1
 
 # TODO: save leaseID in list
-leaseID = []
+leaseIDs = []
 def browser_setup():
     '''
     setup browser
@@ -38,10 +39,19 @@ def open_page(country, block, section):
     browser = browser_setup()
     browser.get(url)
     try:
-        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcsearchButton"]'))).click()
-        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="dijit_rrcGisAnchorMenuItem_7_text"]'))).click()
-
+        WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcsearchButton"]'))).click()
+        time.sleep(waiting)
+        WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="dijit_rrcGisAnchorMenuItem_7_text"]'))).click()
+        time.sleep(waiting)
         inputData(browser, country, block, section)
+        e = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcGisViewerMap_graphics_layer"]')))
+        time.sleep(waiting)
+        ''' trying to identify area
+        location = e.location
+        size = e.size
+        print(location)
+        print(size)
+        '''
         # identify wells
         WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "identifyButton"] / span[1]'))).click()
         WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "dijit_rrcGisAnchorMenuItem_0_text"]'))).click()
@@ -50,7 +60,6 @@ def open_page(country, block, section):
         print(e)
 
     hoverBtns(browser,section)
-
 
 def inputData(browser,country, block, section):
     '''
@@ -87,7 +96,6 @@ def open_second_page(url):
         element = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='searchResults']/tbody//td[contains(text(), 'POTENTIAL')]")))
         WebDriverWait(browser, 30)
         print(element)
-        input()
     except Exception as error:
         print(str(error))
 
@@ -124,14 +132,20 @@ def hoverBtns(browser,section):
 def scrapePopUp(browser,image):
     tbodys = WebDriverWait(browser, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'esriPopupWrapper'))).find_elements_by_tag_name('tbody')
-    print("FOUND POP UP ")
+    print("FOUND POP UP " )
     count = 0
+
     for item in tbodys:
         count += 1
         try:
             tableContent = item.get_attribute('innerHTML')
-            scrapeTable(tableContent)
+            id = scrapeTable(tableContent)
+
+            # TODO: check if correctly save lease ids in list
+            if id != None:
+                leaseIDs.append(id)
             print("TABLE SCRAPED SUCCESSFULLY {}".format(count))
+            input()
         except:
             print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {}".format(count))
 
