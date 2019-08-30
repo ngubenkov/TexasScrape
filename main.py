@@ -6,8 +6,11 @@ import pyscreenshot as ImageGrab
 from tableScrape import scrapeTable
 import time
 from selenium.webdriver.common.action_chains import ActionChains
+import stage3
 from bs4 import BeautifulSoup as BS
 import csv
+DEFAULT_DOWNLOAD_DIRECTORY='/Users/frozmannik/PycharmProjects/TexasScrape/pdf'
+
 '''
 https://medium.com/ymedialabs-innovation/web-scraping-using-beautiful-soup-and-selenium-for-dynamic-page-2f8ad15efe25
 
@@ -18,15 +21,14 @@ waiting = 1
 
 # TODO: save leaseID in list
 leaseIDs = []
-def browser_setup():
+def browser_setup(download_path):
     '''
     setup browser
     '''
-    download_dir = "/Users/frozmannik/PycharmProjects/TexasScrape/pdf"  # for linux/*nix, download_dir="/usr/Public"
     options = webdriver.ChromeOptions()
 
     profile = {"plugins.plugins_list": [{"enabled": False, "name": "Chrome PDF Viewer"}],  # Disable Chrome's PDF Viewer
-               "download.default_directory": download_dir, "download.extensions_to_open": "applications/pdf"}
+               "download.default_directory": download_path, "download.extensions_to_open": "applications/pdf"}
     options.add_experimental_option("prefs", profile)
     browser = webdriver.Chrome('files/chromedriver',chrome_options=options)  # Optional argument, if not specified will search path.
     return browser
@@ -36,7 +38,7 @@ def open_page(country, block, section):
     open browser and click
     '''
     url = "http://wwwgisp.rrc.texas.gov/GISViewer2/"
-    browser = browser_setup()
+    browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY)
     browser.get(url)
     try:
         WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcsearchButton"]'))).click()
@@ -83,21 +85,9 @@ def screenshot(country, block, section):
     im = ImageGrab.grab()
     im.save('screenshots/{}_{}_{}.png'.format(country, block, section))
 
-def open_second_page(url):
-    '''
-    STEP 3 (doesn't work)
-    '''
-    browser = browser_setup()
-    browser.get(url)
-    try:
-        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="lease_numberTEXT"]'))).send_keys("38582")
-        WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="docSearchButton"]'))).click()
-
-        element = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='searchResults']/tbody//td[contains(text(), 'POTENTIAL')]")))
-        WebDriverWait(browser, 30)
-        print(element)
-    except Exception as error:
-        print(str(error))
+def open_second_page(id):
+    test = stage3.OpenSecondPage(id)
+    test.open_second_page()
 
 def hoverBtns(browser,section):
     '''
@@ -145,7 +135,7 @@ def scrapePopUp(browser,image):
             if id != None:
                 leaseIDs.append(id)
             print("TABLE SCRAPED SUCCESSFULLY {}".format(count))
-            input()
+
         except:
             print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {}".format(count))
 
@@ -164,6 +154,9 @@ def scrapePopUp(browser,image):
 
 if __name__ == '__main__':
     open_page('MARTIN', '37 T2N', '36')
+
+    for id in leaseIDs:
+        open_second_page(id)
     #step_4("http://webapps.rrc.texas.gov/CMPL/publicSearchAction.do?formData.methodHndlr.inputValue =init&formData.headerTabSelected=home&formData.pageForwardHndlr.inputValue=home")
     #OpenSecondPage().open_second_page("​https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
 

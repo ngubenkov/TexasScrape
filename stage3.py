@@ -1,40 +1,27 @@
-from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support import expected_conditions as EC
 import time
-from bs4 import BeautifulSoup as BS
-import pyscreenshot as ImageGrab
+from main import browser_setup
+
+DEFAULT_DOWNLOAD_DIRECTORY = '/Users/korouf/Desktop/TEXAS'
+
 
 class OpenSecondPage:
-    def browser_setup(self):
-        '''
-        setup browser
-        '''
+    def __init__(self, key):
+        self.key = key
+
+    def open_second_page(self):
+        browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY)
         try:
-            chromeOptions = webdriver.ChromeOptions()
-            prefs = {"download.default_directory": "/Users/korouf/Desktop/TEXAS"}
-            chromeOptions.add_experimental_option("prefs", prefs)
-
-            browser = webdriver.Chrome(executable_path='files/chromedriver',
-                                       options=chromeOptions)  # fake Chrome browser mac
-            #browser = webdriver.Safari(executable_path='/usr/bin/safaridriver')
-            return browser
-        except Exception as e:
-            print(str(e))
-
-
-    def open_second_page(self, url):
-        browser = self.browser_setup()
-        try:
-            browser.get(url)
+            browser.get("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
         except Exception as err:
             print(str(err))
         try:  # docSearchButton
             leaseID = WebDriverWait(browser, 20).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="lease_numberTEXT"]')))
-            leaseID.send_keys("38582")
+            leaseID.send_keys(self.key)
             search = WebDriverWait(browser, 30).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="docSearchButton"]')))
             search.click()
@@ -48,21 +35,6 @@ class OpenSecondPage:
             time.sleep(5)
             tableid = WebDriverWait(browser, 30).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="searchResults"]')))
-
-            action_buttons = tableid.find_elements(By.CLASS_NAME, 'showActionMenu') # find 16 elements( i guess each 4 elements belongs to 1 action button, so (0,1,2,3) are belongs to action button 1
-
-
-            for button in action_buttons:
-                try:
-                    button.click()
-                    input()
-                except:
-                    print("NOT CORRECT")
-
-
-            ''' 
-            tableid = WebDriverWait(browser, 30).until(
-                EC.presence_of_element_located((By.XPATH, '//*[@id="searchResults"]')))
             tbody = tableid.find_element_by_tag_name('tbody') # get the body of the table
             result_list = tbody.find_elements(By.TAG_NAME, 'tr') # get all the tr of the table above
             download_ids = []
@@ -71,31 +43,32 @@ class OpenSecondPage:
                 for index2, row in enumerate(col):
                     if row and row.get_attribute('headers') == 'thprofile_type' and \
                             row.get_attribute('innerHTML') == 'POTENTIAL':
-                        print (result_list[index1].get_attribute('innerHTML'))
+                        # get the correct id
                         docid = tableid.find_elements(By.XPATH, '//*[@data-docid]')[index1].get_attribute("data-docid")
                         downloadid = 'STANDARD_'+str(docid)
                         download_ids.append(downloadid)
-                        result_list[index1].find_elements(By.XPATH,"//a[@class='showActionMenu']")[0].click()
-                        #// *[ @ id = "searchResults"] / tbody / tr[4] / td[1] / div[2] / a
-                        # WebDriverWait(browser, 30).until(
-                        #     EC.presence_of_element_located((By.XPATH, '//*[@id='+str(downloadid)+']'))).click()
+                        action_menu_lst = result_list[index1].find_element(By.CLASS_NAME, 'showActionMenu')
+                        # click to open menu
+                        action_menu_lst.click()
+                        time.sleep(4)
+                        # get  to the download page
+                        WebDriverWait(browser, 30).until(
+                            EC.presence_of_element_located((By.ID, downloadid))).click()
+                        download_button = WebDriverWait(browser, 30).until(
+                            EC.presence_of_element_located((By.ID, 'downloadMenuButton'))).click()
+                        time.sleep(3)
+                        WebDriverWait(browser, 30).until(
+                            EC.presence_of_element_located((By.ID, 'downloadAllButton'))).click()
+                        time.sleep(3)
+                        WebDriverWait(browser, 30).until(
+                            EC.presence_of_element_located((By.ID, 'closeDoc2'))).click()
+                        time.sleep(2)
             print(download_ids)
             WebDriverWait(browser, 30)
-            #print(element)
-            '''
             input()
         except Exception as error:
             print(str(error))
-            input()
-            #browser.quit()
+            browser.quit()
 
-
-
-
-if __name__ == '__main__':
-    test = OpenSecondPage()
-    test.open_second_page("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
-
-
-    '//*[@id="STANDARD_Zc4AGPmrB0s."]'
-    '//*[@id="STANDARD_SDlGy2DN744."]'
+# test = OpenSecondPage(38582)
+# test.open_second_page()
