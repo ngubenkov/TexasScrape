@@ -46,6 +46,7 @@ def open_page(country, block, section):
         inputData(browser, country, block, section)
         e = WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcGisViewerMap_graphics_layer"]')))
         time.sleep(waiting)
+
         ''' trying to identify area
         location = e.location
         size = e.size
