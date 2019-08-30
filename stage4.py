@@ -1,4 +1,4 @@
-from main import browser_setup
+from main import browser_setup, DEFAULT_DOWNLOAD_DIRECTORY
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -12,7 +12,7 @@ def screenshot(id):
     im.show()
 
 def stage4(id):
-    browser = browser_setup()
+    browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY)
     browser.get('http://webapps.rrc.texas.gov/CMPL/publicSearchAction.do?formData.methodHndlr.inputValue =init&formData.headerTabSelected=home&formData.pageForwardHndlr.inputValue=home')
     WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="leaseNoArgHndlr:12"]'))).send_keys(id)  # Block
     WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/table[6]/tbody/tr/td/form/table/tbody/tr[4]/td/table/tbody/tr[5]/td/table/tbody/tr/td/input[1]'))).click()
