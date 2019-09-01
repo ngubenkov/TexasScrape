@@ -30,6 +30,7 @@ if __name__ == '__main__':
     first_page = stage2.Stage2('MARTIN', '37 T2N', '36', browser)
     leaseIDs = first_page.open_page()
 
+    print(leaseIDs)
     for id in leaseIDs:
         second_page = stage3.OpenSecondPage(id)
         second_page.open_second_page(browser)

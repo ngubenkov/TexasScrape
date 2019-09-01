@@ -45,8 +45,8 @@ def scrapeTable(htmlTable):
 
 
     title = title.replace('/', '_') # convert to proper name
-    print("save file {}_{}.csv".format(title,str(r[idInd])))
-    with open('{}_{}.csv'.format(title,str(r[idInd])), 'w') as writeFile:
+    print("save file {}_{}.csv".format(title,str(r[idInd][0])))
+    with open('{}_{}.csv'.format(title,str(r[idInd][0])), 'w') as writeFile:
         for num, row in enumerate(l, start=0):
             writer = csv.writer(writeFile)
             #print(l[num][0] + " : " + r[num][0])
@@ -56,7 +56,7 @@ def scrapeTable(htmlTable):
 
 
     try:
-        return str(r[idInd])
+        return str(r[idInd][0])
 
     except:
         print("CANNOT RETURN LEASE ID")
