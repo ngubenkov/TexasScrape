@@ -12,8 +12,7 @@ class OpenSecondPage:
     def __init__(self, key):
         self.key = key
 
-    def open_second_page(self):
-        browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY)
+    def open_second_page(self, browser):
         try:
             browser.get("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
         except Exception as err:
