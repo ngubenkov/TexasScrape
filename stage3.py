@@ -64,7 +64,6 @@ class OpenSecondPage:
                         time.sleep(2)
             print(download_ids)
             WebDriverWait(browser, 30)
-            input()
         except Exception as error:
             print(str(error))
             browser.quit()

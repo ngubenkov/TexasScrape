@@ -14,10 +14,10 @@ OAUTH2_SCOPE = 'https://www.googleapis.com/auth/drive'
 CLIENT_SECRETS = 'client_secrets.json'
 
 # Path to the file to upload.
-FILENAME = 'document.txt'
+FILENAME = 'OPERATOR_WELLBORE_35729.csv'
 
 # Metadata about the file.
-MIMETYPE = 'text/plain'
+MIMETYPE = None
 TITLE = 'My New Text Document'
 DESCRIPTION = 'A shiny new text document about hello world.'
 

@@ -15,7 +15,7 @@ class Stage2:
         self.country = country
         self.block = block
         self.section = section
-        self.leaseIDs = []
+        self.leaseIDs = set([])
         self.browser = browser
 
     def open_page(self):
@@ -65,6 +65,7 @@ class Stage2:
         WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#fpSurveySearch #zoomCloseBtn a img'))).click()  # close form
         time.sleep(5)
         self.screenshot()  # dont use it now
+        input()
 
     def screenshot(self):
         im = ImageGrab.grab()
@@ -112,7 +113,8 @@ class Stage2:
             try:
                 tableContent = item.get_attribute('innerHTML')
                 id = scrapeTable(tableContent)
-
+                print("ID IS {}".format(id))
+                input()
                 # TODO: check if correctly save lease ids in list
                 if id != None:
                     self.leaseIDs.append(id)
