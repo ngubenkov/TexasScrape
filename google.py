@@ -6,8 +6,6 @@ from googleapiclient.discovery import build
 import googleapiclient.http
 import oauth2client.client
 
-# uploads each file in different request mb there is a way to submit bulk request
-
 
 def uploadToGoogle(files):
     # OAuth 2.0 scope that will be authorized.
@@ -47,9 +45,10 @@ def uploadToGoogle(files):
 def auth():
     OAUTH2_SCOPE = 'https://www.googleapis.com/auth/drive'
     # Location of the client secrets.
-    CLIENT_SECRETS = 'client_secrets.json'
+    CLIENT_SECRETS = 'credentials.json'
 
     flow = oauth2client.client.flow_from_clientsecrets(CLIENT_SECRETS, OAUTH2_SCOPE)
+
     flow.redirect_uri = oauth2client.client.OOB_CALLBACK_URN
     authorize_url = flow.step1_get_authorize_url()
     print('Go to the following link in your browser: ' + authorize_url)
@@ -63,4 +62,4 @@ def auth():
     drive_service = build('drive', 'v2', http=http)
     return drive_service
 
-uploadToGoogle(['MARTIN_37 T2N_36.png','OPERATOR_WELLBORE.csv'])
+uploadToGoogle(['screenshots/MARTIN_37 T2N_36.png','screenshots/OPERATOR_WELLBORE.csv'])
