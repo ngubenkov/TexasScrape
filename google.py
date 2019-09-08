@@ -6,6 +6,9 @@ from googleapiclient.discovery import build
 import googleapiclient.http
 import oauth2client.client
 
+# uploads each file in different request mb there is a way to submit bulk request
+
+
 def uploadToGoogle(files):
     # OAuth 2.0 scope that will be authorized.
     # Check https://developers.google.com/drive/scopes for all available scopes.
@@ -18,7 +21,7 @@ def uploadToGoogle(files):
         # Metadata about the file.
         MIMETYPE = None
         TITLE = FILENAME
-        DESCRIPTION = 'A shiny new text document about hello world.'
+        #DESCRIPTION = 'A shiny new text document about hello world.'
 
         # Perform OAuth2.0 authorization flow.
 
@@ -33,7 +36,7 @@ def uploadToGoogle(files):
         # The body contains the metadata for the file.
         body = {
             'title': TITLE,
-            'description': DESCRIPTION,
+            #'description': DESCRIPTION,
         }
 
         # Perform the request and print the result.
