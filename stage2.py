@@ -5,7 +5,7 @@ import pyscreenshot as ImageGrab
 from tableScrape import scrapeTable
 import time
 from selenium.webdriver.common.action_chains import ActionChains
-
+import os
 
 waiting = 1
 
@@ -15,14 +15,15 @@ class Stage2:
         self.country = country
         self.block = block
         self.section = section
-        self.leaseIDs = set([])
+        self.leaseIDs = set()
         self.browser = browser
+        self.wells = []
 
     def open_page(self):
         '''
         open browser and click
         '''
-        url = "http://wwwgisp.rrc.texas.gov/GISViewer2/"
+        url = "http://gis.rrc.texas.gov/gisviewer/"
         self.browser.get(url)
         try:
             WebDriverWait(self.browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcsearchButton"]'))).click()
@@ -30,6 +31,7 @@ class Stage2:
             WebDriverWait(self.browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="dijit_rrcGisAnchorMenuItem_7_text"]'))).click()
             time.sleep(waiting)
             self.inputData(self.browser)
+
             e = WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcGisViewerMap_graphics_layer"]')))
             time.sleep(waiting)
             ''' trying to identify area
@@ -45,7 +47,8 @@ class Stage2:
         except Exception as e:
             print(e)
 
-        self.hoverBtns(self.browser)
+        self.testHover(self.browser)
+        #self.hoverBtns(self.browser)
         return self.leaseIDs if self.leaseIDs else None
 
     def inputData(self, browser):
@@ -65,12 +68,71 @@ class Stage2:
         WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#fpSurveySearch #zoomCloseBtn a img'))).click()  # close form
         time.sleep(5)
         self.screenshot()  # dont use it now
-        input()
+
+        # get coordinates of wells inside of area by hover them and and if pop up isn't appear save coordinates
+        self.get_wells(browser)
+
+    def get_wells(self,browser):
+        wellMap = WebDriverWait(self.browser, 10).until(
+            EC.presence_of_element_located((By.XPATH, '//*[@id="rrcGisViewerMap"]')))
+        wellimages = wellMap.find_elements_by_tag_name('image')
+        wells = 0
+
+        for image in wellimages:
+            try:
+                hover = ActionChains(browser).move_to_element(image)
+                hover.perform()
+                time.sleep(1)
+                descriptionForm = WebDriverWait(browser, 2).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
+                br = descriptionForm.find_element(By.CLASS_NAME, "dijitTooltipFocusNode")
+                if '"{}"'.format(self.section) in br.text[br.text.find('Lease Name :'):br.text.find('On Schedule :')]:
+                    print("FOUND ")
+
+                    image.click()
+                    time.sleep(3)
+                    self.scrapePopUp(browser, image)
+
+            except:
+
+                print("Potensial correct")
+                wells += 1
+                self.wells.append(image)
+
+                pass
+        print("TOTAL WELLS {}".format(wells))
 
     def screenshot(self):
         im = ImageGrab.grab()
-        im.save('screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
+        if os.path.exists('screenshots'):
+            im.save('screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
+        else:
+            os.makedirs('screenshots')
+            im.save('screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
 
+    def testHover(self, browser):
+        wells = 0
+        for image in self.wells:
+            try:
+                hover = ActionChains(browser).move_to_element(image)
+                hover.perform()
+                time.sleep(1)
+                print("PROBABLY FOUND")
+                input()
+                descriptionForm = WebDriverWait(browser, 2).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
+                br = descriptionForm.find_element(By.CLASS_NAME,"dijitTooltipFocusNode")
+                if br:
+                    print("FOUND ")
+
+                    wells += 1
+                    image.click()
+                    time.sleep(3)
+                    self.scrapePopUp(browser,image)
+
+            except:
+                print(" Acceptable shit happened")
+                pass
+        print("TOTAL WELLS {}".format(wells))
 
     def hoverBtns(self, browser):
         '''
@@ -114,10 +176,9 @@ class Stage2:
                 tableContent = item.get_attribute('innerHTML')
                 id = scrapeTable(tableContent)
                 print("ID IS {}".format(id))
-                input()
                 # TODO: check if correctly save lease ids in list
                 if id != None:
-                    self.leaseIDs.append(id)
+                    self.leaseIDs.add(id)
                 print("TABLE SCRAPED SUCCESSFULLY {}".format(count))
 
             except:

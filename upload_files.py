@@ -35,13 +35,6 @@ def main():
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
 
-    # store = file.Storage('storage.json')
-    # creds = store.get()
-    # if not creds or creds.invalid:
-    #     flow = client.flow_from_clientsecrets('/Users/korouf/Downloads/client_secret.json', SCOPES)
-    #     creds = tools.run_flow(flow, store)
-    # service = discovery.build('drive', 'v3', http=creds.authorize(Http()))
-
     service = build('drive', 'v3', credentials=creds)
     FILES= []
     with os.scandir(UPLOAD_DIRECTORY) as allfiles:

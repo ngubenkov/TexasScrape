@@ -4,11 +4,6 @@ import stage2
 import stage4
 DEFAULT_DOWNLOAD_DIRECTORY='/Users/frozmannik/PycharmProjects/TexasScrape/pdf'
 
-'''
-https://medium.com/ymedialabs-innovation/web-scraping-using-beautiful-soup-and-selenium-for-dynamic-page-2f8ad15efe25
-
-selenium + beautifulsoup because it dynamic page
-'''
 
 
 def browser_setup(download_path):
@@ -28,8 +23,9 @@ if __name__ == '__main__':
     # open_page('MARTIN', '37 T2N', '36')
     browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY)
     first_page = stage2.Stage2('MARTIN', '37 T2N', '36', browser)
-    leaseIDs = first_page.open_page()
 
+    leaseIDs = first_page.open_page()
+    print(first_page.leaseIDs)
     print(leaseIDs)
     for id in leaseIDs:
         second_page = stage3.OpenSecondPage(id)
