@@ -9,7 +9,6 @@ import os
 
 waiting = 1
 
-
 class Stage2:
     def __init__(self, country, block, section, browser):
         self.country = country
@@ -17,6 +16,7 @@ class Stage2:
         self.section = section
         self.leaseIDs = set()
         self.browser = browser
+        self.mainFolder = self.country+"_"+self.block+"_"+self.section
         self.wells = []
 
     def open_page(self):
@@ -26,6 +26,7 @@ class Stage2:
         url = "http://gis.rrc.texas.gov/gisviewer/"
         self.browser.get(url)
         try:
+            self.createFolder()
             WebDriverWait(self.browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcsearchButton"]'))).click()
             time.sleep(waiting)
             WebDriverWait(self.browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="dijit_rrcGisAnchorMenuItem_7_text"]'))).click()
@@ -34,12 +35,6 @@ class Stage2:
 
             e = WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcGisViewerMap_graphics_layer"]')))
             time.sleep(waiting)
-            ''' trying to identify area
-            location = e.location
-            size = e.size
-            print(location)
-            print(size)
-            '''
             # identify wells
             WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "identifyButton"] / span[1]'))).click()
             WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "dijit_rrcGisAnchorMenuItem_0_text"]'))).click()
@@ -48,8 +43,14 @@ class Stage2:
             print(e)
 
         self.testHover(self.browser)
-        #self.hoverBtns(self.browser)
         return self.leaseIDs if self.leaseIDs else None
+
+    def createFolder(self):
+        '''
+        create folder for project
+        '''
+        if os.path.exists(self.mainFolder) == False:
+            os.makedirs(self.mainFolder)
 
     def inputData(self, browser):
         '''
@@ -104,11 +105,11 @@ class Stage2:
 
     def screenshot(self):
         im = ImageGrab.grab()
-        if os.path.exists('screenshots'):
-            im.save('screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
+        if os.path.exists(self.mainFolder+'/screenshots'):
+            im.save(self.mainFolder+'/screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
         else:
-            os.makedirs('screenshots')
-            im.save('screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
+            os.makedirs(self.mainFolder+'/screenshots')
+            im.save(self.mainFolder+'/screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
 
     def testHover(self, browser):
         wells = 0
@@ -117,13 +118,10 @@ class Stage2:
                 hover = ActionChains(browser).move_to_element(image)
                 hover.perform()
                 time.sleep(1)
-                print("PROBABLY FOUND")
-                input()
                 descriptionForm = WebDriverWait(browser, 2).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
                 br = descriptionForm.find_element(By.CLASS_NAME,"dijitTooltipFocusNode")
                 if br:
                     print("FOUND ")
-
                     wells += 1
                     image.click()
                     time.sleep(3)
@@ -169,14 +167,11 @@ class Stage2:
                 EC.presence_of_element_located((By.CLASS_NAME, 'esriPopupWrapper'))).find_elements_by_tag_name('tbody')
         print("FOUND POP UP " )
         count = 0
-
         for item in tbodys:
             count += 1
             try:
                 tableContent = item.get_attribute('innerHTML')
-                id = scrapeTable(tableContent)
-                print("ID IS {}".format(id))
-                # TODO: check if correctly save lease ids in list
+                id = scrapeTable(tableContent, self.mainFolder)
                 if id != None:
                     self.leaseIDs.add(id)
                 print("TABLE SCRAPED SUCCESSFULLY {}".format(count))

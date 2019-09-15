@@ -1,7 +1,8 @@
 import csv
 from bs4 import BeautifulSoup as BS
+import os
 
-def scrapeTable(htmlTable):
+def scrapeTable(htmlTable, mainFolder):
     ''' Scrape html table object
     input:
     '''
@@ -9,7 +10,6 @@ def scrapeTable(htmlTable):
 
     left_rows = [tr.findAll('th') for tr in soup.findAll('tr')[:]]
     right_rows = [tr.findAll('td') for tr in soup.findAll('tr')[:]]
-
 
     # sometimes table has first row empty
     if left_rows[0][0].text != "":
@@ -25,16 +25,12 @@ def scrapeTable(htmlTable):
     for i in left_rows:
         try:
             l.append([i[0].text])
-           # print(i[0].text)
             if 'LEASE/ID' in i[0].text:
-               # print("FOUND LEASE ID AT POSITION")
-              #  print(str(ind))
                 idInd = ind
         except IndexError as e:
             l.append([""])
 
         ind += 1
-
 
     for i in right_rows:
         try:
@@ -42,18 +38,24 @@ def scrapeTable(htmlTable):
         except IndexError as e:
             r.append([""])
 
-
-
     title = title.replace('/', '_') # convert to proper name
-    print("save file {}_{}.csv".format(title,str(r[idInd][0])))
-    with open('{}_{}.csv'.format(title,str(r[idInd][0])), 'w') as writeFile:
+    print("save file " + mainFolder+"/"+str(r[2][0])+"/{}_{}.csv".format(title,str(r[idInd][0])))
+
+    # TODO: doesnt create folder
+
+    if os.path(mainFolder+"/"+str(r[2][0])) == False:
+        print("@@@@@@@@@@")
+        os.makedirs(mainFolder+"/"+str(r[2][0]))
+        print("MAKE DIR")
+    else:
+        print("FUCK YOU")
+
+    with open(mainFolder+"/"+str(r[2][0])+'/{}_{}.csv'.format(title,str(r[idInd][0])), 'w') as writeFile:
         for num, row in enumerate(l, start=0):
             writer = csv.writer(writeFile)
-            #print(l[num][0] + " : " + r[num][0])
             writer.writerow([l[num][0], r[num][0]])
 
     writeFile.close()
-
 
     try:
         return str(r[idInd][0])
