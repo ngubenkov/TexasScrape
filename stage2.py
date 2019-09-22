@@ -9,6 +9,7 @@ import os
 
 waiting = 1
 
+
 class Stage2:
     def __init__(self, country, block, section, browser):
         self.country = country
@@ -16,7 +17,7 @@ class Stage2:
         self.section = section
         self.leaseIDs = set()
         self.browser = browser
-        self.mainFolder = self.country+"_"+self.block+"_"+self.section
+        self.mainFolder = self.country + "_" + self.block + "_" + self.section
         self.wells = []
 
     def open_page(self):
@@ -26,21 +27,26 @@ class Stage2:
         url = "http://gis.rrc.texas.gov/gisviewer/"
         self.browser.get(url)
         try:
-            self.createFolder()
-            WebDriverWait(self.browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcsearchButton"]'))).click()
+            #self.createFolder()
+            WebDriverWait(self.browser, 30).until(
+                EC.presence_of_element_located((By.XPATH, '//*[@id="rrcsearchButton"]'))).click()
             time.sleep(waiting)
-            WebDriverWait(self.browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="dijit_rrcGisAnchorMenuItem_7_text"]'))).click()
+            WebDriverWait(self.browser, 30).until(
+                EC.presence_of_element_located((By.XPATH, '//*[@id="dijit_rrcGisAnchorMenuItem_7_text"]'))).click()
             time.sleep(waiting)
             self.inputData(self.browser)
 
-            e = WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="rrcGisViewerMap_graphics_layer"]')))
+            e = WebDriverWait(self.browser, 20).until(
+                EC.presence_of_element_located((By.XPATH, '//*[@id="rrcGisViewerMap_graphics_layer"]')))
             time.sleep(waiting)
             # identify wells
-            WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "identifyButton"] / span[1]'))).click()
-            WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "dijit_rrcGisAnchorMenuItem_0_text"]'))).click()
+            WebDriverWait(self.browser, 20).until(
+                EC.presence_of_element_located((By.XPATH, '// *[ @ id = "identifyButton"] / span[1]'))).click()
+            WebDriverWait(self.browser, 20).until(
+                EC.presence_of_element_located((By.XPATH, '// *[ @ id = "dijit_rrcGisAnchorMenuItem_0_text"]'))).click()
 
         except Exception as e:
-            print(e)
+            print(str(e))
 
         self.testHover(self.browser)
         return self.leaseIDs if self.leaseIDs else None
@@ -49,31 +55,37 @@ class Stage2:
         '''
         create folder for project
         '''
-        if os.path.exists(self.mainFolder) == False:
+        if not os.path.exists(self.mainFolder):
             os.makedirs(self.mainFolder)
 
     def inputData(self, browser):
         '''
         input data in search
         '''
-        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="countySelect"]/tbody/tr/td[2]/div[1]'))).click() # select countries btn
-        items = WebDriverWait(browser, 20).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'dijitMenuItemLabel'))) # list of drop down items
+        WebDriverWait(browser, 20).until(EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="countySelect"]/tbody/tr/td[2]/div[1]'))).click()  # select countries btn
+        items = WebDriverWait(browser, 20).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, 'dijitMenuItemLabel')))  # list of drop down items
 
         for _ in items:
             if self.country.upper() in _.get_attribute('innerHTML'):
                 _.click()
 
-        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "blockID"]'))).send_keys(self.block) # Block
-        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "sectionID"]'))).send_keys(self.section) # Section
-        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "querySurveyButton_label"]'))).click() # Query button
-        WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#fpSurveySearch #zoomCloseBtn a img'))).click()  # close form
+        WebDriverWait(browser, 20).until(
+            EC.presence_of_element_located((By.XPATH, '// *[ @ id = "blockID"]'))).send_keys(self.block)  # Block
+        WebDriverWait(browser, 20).until(
+            EC.presence_of_element_located((By.XPATH, '// *[ @ id = "sectionID"]'))).send_keys(self.section)  # Section
+        WebDriverWait(browser, 20).until(EC.presence_of_element_located(
+            (By.XPATH, '// *[ @ id = "querySurveyButton_label"]'))).click()  # Query button
+        WebDriverWait(browser, 20).until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, '#fpSurveySearch #zoomCloseBtn a img'))).click()  # close form
         time.sleep(5)
         self.screenshot()  # dont use it now
 
         # get coordinates of wells inside of area by hover them and and if pop up isn't appear save coordinates
         self.get_wells(browser)
 
-    def get_wells(self,browser):
+    def get_wells(self, browser):
         wellMap = WebDriverWait(self.browser, 10).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="rrcGisViewerMap"]')))
         wellimages = wellMap.find_elements_by_tag_name('image')
@@ -95,7 +107,6 @@ class Stage2:
                     self.scrapePopUp(browser, image)
 
             except:
-
                 print("Potensial correct")
                 wells += 1
                 self.wells.append(image)
@@ -105,11 +116,11 @@ class Stage2:
 
     def screenshot(self):
         im = ImageGrab.grab()
-        if os.path.exists(self.mainFolder+'/screenshots'):
-            im.save(self.mainFolder+'/screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
+        if os.path.exists(self.mainFolder + '/screenshots'):
+            im.save(self.mainFolder + '/screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
         else:
-            os.makedirs(self.mainFolder+'/screenshots')
-            im.save(self.mainFolder+'/screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
+            os.makedirs(self.mainFolder + '/screenshots')
+            im.save(self.mainFolder + '/screenshots/{}_{}_{}.png'.format(self.country, self.block, self.section))
 
     def testHover(self, browser):
         wells = 0
@@ -118,14 +129,15 @@ class Stage2:
                 hover = ActionChains(browser).move_to_element(image)
                 hover.perform()
                 time.sleep(1)
-                descriptionForm = WebDriverWait(browser, 2).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
-                br = descriptionForm.find_element(By.CLASS_NAME,"dijitTooltipFocusNode")
+                descriptionForm = WebDriverWait(browser, 2).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
+                br = descriptionForm.find_element(By.CLASS_NAME, "dijitTooltipFocusNode")
                 if br:
                     print("FOUND ")
                     wells += 1
                     image.click()
                     time.sleep(3)
-                    self.scrapePopUp(browser,image)
+                    self.scrapePopUp(browser, image)
 
             except:
                 print(" Acceptable shit happened")
@@ -139,7 +151,8 @@ class Stage2:
         :param browser:
         :return:
         '''
-        wellMap = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.XPATH,'//*[@id="rrcGisViewerMap"]')))
+        wellMap = WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.XPATH, '//*[@id="rrcGisViewerMap"]')))
         wellimages = wellMap.find_elements_by_tag_name('image')
         wells = 0
 
@@ -148,36 +161,40 @@ class Stage2:
                 hover = ActionChains(browser).move_to_element(image)
                 hover.perform()
                 time.sleep(1)
-                descriptionForm = WebDriverWait(browser, 2).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
-                br = descriptionForm.find_element(By.CLASS_NAME,"dijitTooltipFocusNode")
+                descriptionForm = WebDriverWait(browser, 2).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
+                br = descriptionForm.find_element(By.CLASS_NAME, "dijitTooltipFocusNode")
                 if '"{}"'.format(self.section) in br.text[br.text.find('Lease Name :'):br.text.find('On Schedule :')]:
                     print("FOUND ")
                     wells += 1
                     image.click()
                     time.sleep(3)
-                    self.scrapePopUp(browser,image)
+                    self.scrapePopUp(browser, image)
 
             except:
                 print(" Acceptable shit happened")
                 pass
         print("TOTAL WELLS {}".format(wells))
 
-    def scrapePopUp(self, browser,image):
+    def scrapePopUp(self, browser, image):
         tbodys = WebDriverWait(browser, 10).until(
-                EC.presence_of_element_located((By.CLASS_NAME, 'esriPopupWrapper'))).find_elements_by_tag_name('tbody')
-        print("FOUND POP UP " )
+            EC.presence_of_element_located((By.CLASS_NAME, 'esriPopupWrapper'))).find_elements_by_tag_name('tbody')
+        print("FOUND POP UP ")
         count = 0
+        tempL, tempR = None,None
         for item in tbodys:
             count += 1
             try:
                 tableContent = item.get_attribute('innerHTML')
-                id = scrapeTable(tableContent, self.mainFolder)
-                if id != None:
+                if count==1:
+                    tempL,tempR = scrapeTable(tableContent, self.mainFolder)
+                else:
+                    id = scrapeTable(tableContent, self.mainFolder,tempL,tempR)
                     self.leaseIDs.add(id)
                 print("TABLE SCRAPED SUCCESSFULLY {}".format(count))
 
-            except:
-                print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {}".format(count))
+            except Exception as e:
+                print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {} exception : {}".format(count, str(e)))
 
         while True:
             try:

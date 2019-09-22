@@ -1,18 +1,15 @@
 import pickle
 import os.path
 import os
-from apiclient import discovery
-from httplib2 import Http
-from oauth2client import file, client, tools
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = 'https://www.googleapis.com/auth/drive'
-UPLOAD_DIRECTORY = 'screenshots/'
 
-def main():
+
+def upload_allfiles_google(UPLOAD_DIRECTORY):
     """Shows basic usage of the Drive v3 API.
     Prints the names and ids of the first 10 files the user has access to.
     """
@@ -51,7 +48,3 @@ def main():
         res = service.files().create(body=metadata, media_body=UPLOAD_DIRECTORY+ filename).execute()
         if res:
             print('Uploaded "%s"' % filename)
-
-
-if __name__ == '__main__':
-    main()

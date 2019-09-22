@@ -2,10 +2,11 @@ import csv
 from bs4 import BeautifulSoup as BS
 import os
 
-def scrapeTable(htmlTable, mainFolder):
+def scrapeTable(htmlTable, mainFolder, pl = None, pr=None):
     ''' Scrape html table object
     input:
     '''
+    print("SCRAPE")
     soup = BS(htmlTable, 'html.parser')
 
     left_rows = [tr.findAll('th') for tr in soup.findAll('tr')[:]]
@@ -38,31 +39,46 @@ def scrapeTable(htmlTable, mainFolder):
         except IndexError as e:
             r.append([""])
 
-    title = title.replace('/', '_') # convert to proper name
-    print("save file " + mainFolder+"/"+str(r[2][0])+"/{}_{}.csv".format(title,str(r[idInd][0])))
-
-    # TODO: doesnt create folder
-
-    if os.path(mainFolder+"/"+str(r[2][0])) == False:
-        print("@@@@@@@@@@")
-        os.makedirs(mainFolder+"/"+str(r[2][0]))
-        print("MAKE DIR")
+    if not pl and not pr:
+        return l,r, None
     else:
-        print("FUCK YOU")
+        pl.extend(l)
+        pr.extend(r)
+        title = title.replace('/', '_') # convert to proper name
+        if idInd:
+            fileName = mainFolder+"/"+str(r[2][0])+"/{}_{}.csv".format(title,str(r[idInd][0]))
+            print("save file " + fileName)
+        else:
+            fileName =  mainFolder + "/" + str(r[2][0]) + "/{}.csv".format(title)
+            print("save file " + fileName)
+        print("TABLE")
+        print(htmlTable)
+        print("MB CORRECT TABLE")
+        print(soup)
 
-    with open(mainFolder+"/"+str(r[2][0])+'/{}_{}.csv'.format(title,str(r[idInd][0])), 'w') as writeFile:
-        for num, row in enumerate(l, start=0):
-            writer = csv.writer(writeFile)
-            writer.writerow([l[num][0], r[num][0]])
 
-    writeFile.close()
+        input()
+        # TODO: doesnt create folder
+        if not os.path.exists(mainFolder+"/"+str(r[2][0])):
+            print("@@@@@@@@@@")
+            os.makedirs(mainFolder+"/"+str(r[2][0]))
+            print("MAKE DIR")
+        else:
+            print("FUCK YOU")
 
-    try:
-        return str(r[idInd][0])
+        with open(fileName, 'w') as writeFile:
+            for num, row in enumerate(l, start=0):
+                writer = csv.writer(writeFile)
+                writer.writerow([l[num][0], r[num][0]])
 
-    except:
-        print("CANNOT RETURN LEASE ID")
-        return None
+        writeFile.close()
+
+        try:
+            return str(r[idInd][0])
+
+        except:
+            print("CANNOT RETURN LEASE ID")
+            return None
 
 
 
