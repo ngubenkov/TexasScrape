@@ -2,7 +2,7 @@ import csv
 from bs4 import BeautifulSoup as BS
 import os
 
-def scrapeTable(htmlTable, mainFolder):
+def scrapeTable(htmlTable, mainFolder, folderInd):
     ''' Scrape html table object
     input:
     '''
@@ -39,30 +39,34 @@ def scrapeTable(htmlTable, mainFolder):
             r.append([""])
 
     title = title.replace('/', '_') # convert to proper name
-    print("save file " + mainFolder+"/"+str(r[2][0])+"/{}_{}.csv".format(title,str(r[idInd][0])))
 
-    # TODO: doesnt create folder
+    print("HERE 1")
+    print(title)
+    print(folderInd)
+    if not os.path.exists(mainFolder + "/{}".format(folderInd)):
+        os.makedirs(mainFolder + "/{}".format(folderInd))
 
-    if os.path(mainFolder+"/"+str(r[2][0])) == False:
-        print("@@@@@@@@@@")
-        os.makedirs(mainFolder+"/"+str(r[2][0]))
-        print("MAKE DIR")
-    else:
-        print("FUCK YOU")
+    print("HERE 222")
 
-    with open(mainFolder+"/"+str(r[2][0])+'/{}_{}.csv'.format(title,str(r[idInd][0])), 'w') as writeFile:
-        for num, row in enumerate(l, start=0):
-            writer = csv.writer(writeFile)
-            writer.writerow([l[num][0], r[num][0]])
+    try: # works fine for table 2
+        print("save file " + "save file " + mainFolder + "/" + str(folderInd) + "/{}.csv".format(title))
+        with open(mainFolder + "/" + str(folderInd) + "/{}.csv".format(title), 'w') as writeFile:
+            for num, row in enumerate(l, start=0):
+                writer = csv.writer(writeFile)
+                # print(l[num][0] + " : " + r[num][0])
+                writer.writerow([l[num], r[num]])
 
-    writeFile.close()
+        writeFile.close()
 
-    try:
-        return str(r[idInd][0])
+        try:
+            return str(r[idInd])
+        except:
+            print("CANNOT RETURN LEASE ID")
+            return None
 
-    except:
-        print("CANNOT RETURN LEASE ID")
-        return None
+    except Exception as e:
+        print(e)
+
 
 
 

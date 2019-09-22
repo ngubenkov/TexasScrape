@@ -28,8 +28,6 @@ class Stage4:
             print("click to go to next detail")
 
 
-            input()
-
     def scrapeTable(self):
         table = WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/table[6]/tbody/tr/td/form/table/tbody/tr[3]/td/table/tbody/tr[3]/td/table/tbody')))
         links = table.find_elements_by_tag_name('a')
