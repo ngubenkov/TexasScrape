@@ -12,8 +12,9 @@ def browser_setup(download_path):
     '''
     options = webdriver.ChromeOptions()
 
-    profile = {"plugins.plugins_list": [{"enabled": False, "name": "Chrome PDF Viewer"}],  # Disable Chrome's PDF Viewer
-               "download.default_directory": download_path, "download.extensions_to_open": "applications/pdf"}
+    profile = {"plugins.plugins_disabled" : ["Chrome PDF Viewer"],  # Disable Chrome's PDF Viewer
+               "download.default_directory": download_path,"plugins.always_open_pdf_externally": True,
+               "download.extensions_to_open": "applications/pdf"}
     options.add_experimental_option("prefs", profile)
     browser = webdriver.Chrome('files/chromedriver',chrome_options=options)  # Optional argument, if not specified will search path.
     return browser
@@ -21,9 +22,9 @@ def browser_setup(download_path):
 
 if __name__ == '__main__':
     browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY)
-    first_page = stage2.Stage2('MARTIN', '37 T2N', '36', browser)
-
-    leaseIDs = first_page.open_page()
+    #first_page = stage2.Stage2('MARTIN', '37 T2N', '36', browser)
+    #leaseIDs = first_page.open_page()
+    leaseIDs = {'21893', '38582', '35729'}
     print(leaseIDs)
     for id in leaseIDs:
         second_page = stage3.OpenSecondPage(id)

@@ -59,7 +59,8 @@ def scrapeTable(htmlTable, mainFolder, folderInd):
         writeFile.close()
 
         try:
-            return str(r[idInd])
+            print("RETURNING A {}".format(r[idInd][0]))
+            return r[idInd][0]
         except:
             print("CANNOT RETURN LEASE ID")
             return None

@@ -19,6 +19,7 @@ class Stage2:
         self.mainFolder = (self.country+"_"+self.block+"_"+self.section)
         self.mainFolder=self.mainFolder.replace(' ', '_')
         self.wells = []
+        self.wellCount = 1
 
     def open_page(self):
         '''
@@ -89,7 +90,7 @@ class Stage2:
                     EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
                 br = descriptionForm.find_element(By.CLASS_NAME, "dijitTooltipFocusNode")
                 if '"{}"'.format(self.section) in br.text[br.text.find('Lease Name :'):br.text.find('On Schedule :')]:
-                    print("FOUND ")
+                    print("FOUND 1")
                     input()
                     image.click()
                     time.sleep(3)
@@ -119,13 +120,14 @@ class Stage2:
                 time.sleep(1)
                 descriptionForm = WebDriverWait(browser, 2).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
                 br = descriptionForm.find_element(By.CLASS_NAME,"dijitTooltipFocusNode")
+
                 if br:
-                    print("FOUND ")
+                    print("FOUND 22")
                     wells += 1
                     image.click()
                     time.sleep(3)
                     print("HERE")
-                    self.scrapePopUp(browser,image)
+                    self.scrapePopUp(browser,image) # need insert index
 
             except Exception as e:
                 print(" Acceptable shit happened : {}".format(str(e)) )
@@ -156,7 +158,7 @@ class Stage2:
                     wells += 1
                     image.click()
                     time.sleep(3)
-                    self.scrapePopUp(browser,image,ind)
+                    self.scrapePopUp(browser,image)
 
             except Exception as e:
                 print("Acceptable shit happened : {}".format(str(e)))
@@ -164,24 +166,25 @@ class Stage2:
             ind = ind+1
         print("TOTAL WELLS {}".format(wells))
 
-    def scrapePopUp(self, browser,image,ind):
+    def scrapePopUp(self, browser,image):
         tbodys = WebDriverWait(browser, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'esriPopupWrapper'))).find_elements_by_tag_name('tbody')
-        print("FOUND POP UP " )
-        print(ind)
+
         count = 0
         for item in tbodys:
             count += 1
             try:
                 tableContent = item.get_attribute('innerHTML')
-                id = scrapeTable(tableContent, self.mainFolder, ind)
+                id = scrapeTable(tableContent, self.mainFolder, self.wellCount)
                 if id != None:
                     self.leaseIDs.add(id)
                 print("TABLE SCRAPED SUCCESSFULLY {}".format(count))
 
+
             except Exception as e:
                 print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {} : {}".format(count, str(e)))
 
+        self.wellCount += 1
         while True:
             try:
                 WebDriverWait(browser, 10).until(  # close form

@@ -2,8 +2,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import pyscreenshot as ImageGrab
-from tableScrape import scrapeTable
-
 
 class Stage4:
     def __init__(self, browser, id):
@@ -20,7 +18,7 @@ class Stage4:
         WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="leaseNoArgHndlr:12"]'))).send_keys(self.id)  # Block
         WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/table[6]/tbody/tr/td/form/table/tbody/tr[4]/td/table/tbody/tr[5]/td/table/tbody/tr/td/input[1]'))).click()
         #screenshot(self.id)
-        recordsFoundLinks = scrapeTable(self.browser)
+        recordsFoundLinks = self.scrapeTable()
         for record in recordsFoundLinks:
             details = self.scrapeDetails(record)
             for detail in details:
