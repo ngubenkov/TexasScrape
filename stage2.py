@@ -41,7 +41,7 @@ class Stage2:
             WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '// *[ @ id = "dijit_rrcGisAnchorMenuItem_0_text"]'))).click()
 
         except Exception as e:
-            print(e)
+            print(str(e))
 
         self.testHover(self.browser)
         return self.leaseIDs if self.leaseIDs else None
@@ -128,7 +128,7 @@ class Stage2:
                     self.scrapePopUp(browser,image)
 
             except Exception as e:
-                print(" Acceptable shit happened : {}".format(e) )
+                print(" Acceptable shit happened : {}".format(str(e)) )
                 pass
         print("TOTAL WELLS {}".format(wells))
 
@@ -159,7 +159,7 @@ class Stage2:
                     self.scrapePopUp(browser,image,ind)
 
             except Exception as e:
-                print("Acceptable shit happened : {}".format(e))
+                print("Acceptable shit happened : {}".format(str(e)))
                 pass
             ind = ind+1
         print("TOTAL WELLS {}".format(wells))
@@ -180,7 +180,7 @@ class Stage2:
                 print("TABLE SCRAPED SUCCESSFULLY {}".format(count))
 
             except Exception as e:
-                print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {} : {}".format(count, e))
+                print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {} : {}".format(count, str(e)))
 
         while True:
             try:

@@ -65,7 +65,7 @@ def scrapeTable(htmlTable, mainFolder, folderInd):
             return None
 
     except Exception as e:
-        print(e)
+        print(str(e))
 
 
 
