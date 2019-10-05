@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="35752d20-9cca-425c-85b9-979bda3120d0" name="Default Changelist" comment="google upload">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/screenshots/MARTIN_37 T2N_36.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/8e9a8f301c394ff27d8f7035c40ee901_1568560567.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage2.py" beforeDir="false" afterPath="$PROJECT_DIR$/stage2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage4.py" beforeDir="false" afterPath="$PROJECT_DIR$/stage4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tableScrape.py" beforeDir="false" afterPath="$PROJECT_DIR$/tableScrape.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/9e786d3ad71708e2581b54ab27e6f8c9_1569945472.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stage3.py" beforeDir="false" afterPath="$PROJECT_DIR$/stage3.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="14" column="66" selection-start-line="14" selection-start-column="66" selection-end-line="14" selection-end-column="66" />
+            <state relative-caret-position="59">
+              <caret line="14" column="59" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -30,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stage4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="25" column="47" lean-forward="true" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+            <state relative-caret-position="-64">
+              <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
               </folding>
@@ -45,21 +42,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stage2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+            <state relative-caret-position="795">
+              <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="54" selection-end-column="40" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
-                <element signature="e#4655#5029#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stage3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="16" column="84" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="84" />
+            <state relative-caret-position="210">
+              <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#55#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -67,7 +66,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tableScrape.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
+            <state relative-caret-position="780">
               <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
@@ -117,20 +116,20 @@
         <option value="$PROJECT_DIR$/data/test.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/findWells.py" />
-        <option value="$PROJECT_DIR$/stage3.py" />
         <option value="$PROJECT_DIR$/credentials.json" />
         <option value="$PROJECT_DIR$/google.py" />
         <option value="$PROJECT_DIR$/upload_files.py" />
         <option value="$PROJECT_DIR$/stage2.py" />
         <option value="$PROJECT_DIR$/tableScrape.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/stage4.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/stage3.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="79" />
-    <option name="y" value="86" />
+    <option name="x" value="101" />
+    <option name="y" value="25" />
     <option name="width" value="1440" />
     <option name="height" value="798" />
   </component>
@@ -147,6 +146,11 @@
             <path>
               <item name="TexasScrape" type="b2602c69:ProjectViewProjectNode" />
               <item name="TexasScrape" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TexasScrape" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TexasScrape" type="462c0819:PsiDirectoryNode" />
+              <item name="pdf" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -335,7 +339,8 @@
       <workItem from="1567880169999" duration="5998000" />
       <workItem from="1568004191764" duration="465000" />
       <workItem from="1568477359437" duration="12981000" />
-      <workItem from="1568551205053" duration="24378000" />
+      <workItem from="1568551205053" duration="24896000" />
+      <workItem from="1570292026822" duration="7825000" />
     </task>
     <task id="LOCAL-00001" summary="drivers are addded and example(mb useful) code">
       <created>1564773528122</created>
@@ -418,7 +423,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137991000" />
+    <option name="totallyTimeSpent" value="146334000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -433,21 +438,21 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.39842632" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17310444" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32650602" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.43975905" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3987952" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" weight="0.51699716" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.398017" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="TODO" order="6" visible="true" weight="0.32771084" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4990177" weight="0.32859176" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50143063" side_tool="true" weight="0.45609066" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4985694" weight="0.21104816" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4985694" weight="0.21084337" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
@@ -457,13 +462,13 @@
       <window_info anchor="right" id="Database" order="5" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14878398" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32650602" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.17590362" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.43975905" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.398017" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -471,7 +476,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4990177" weight="0.32859176" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50143063" side_tool="true" weight="0.45609066" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4985694" weight="0.17988668" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4985694" weight="0.21084337" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
@@ -501,7 +506,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TexasScrape$stage3.coverage" NAME="stage3 Coverage Results" MODIFIED="1565881945283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TexasScrape$upload_files.coverage" NAME="upload_files Coverage Results" MODIFIED="1568479232039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TexasScrape$main.coverage" NAME="main Coverage Results" MODIFIED="1569945413373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TexasScrape$main.coverage" NAME="main Coverage Results" MODIFIED="1570301529490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TexasScrape$google.coverage" NAME="google Coverage Results" MODIFIED="1567962003468" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TexasScrape$tableScrape.coverage" NAME="tableScrape Coverage Results" MODIFIED="1565097119294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TexasScrape$findWells.coverage" NAME="findWells Coverage Results" MODIFIED="1565086007054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -587,7 +592,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tableScrape.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
+        <state relative-caret-position="780">
           <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
@@ -597,36 +602,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stage2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+        <state relative-caret-position="795">
+          <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="54" selection-end-column="40" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
-            <element signature="e#4655#5029#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stage3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="16" column="84" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="14" column="66" selection-start-line="14" selection-start-column="66" selection-end-line="14" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stage4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="25" column="47" lean-forward="true" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+        <state relative-caret-position="-64">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="14" column="59" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stage3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
           </folding>

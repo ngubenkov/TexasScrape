@@ -2,8 +2,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver import ChromeOptions, Chrome
 import time
-from main import browser_setup
+import os
 
 DEFAULT_DOWNLOAD_DIRECTORY = '/Users/korouf/Desktop/TEXAS'
 
@@ -11,10 +12,34 @@ DEFAULT_DOWNLOAD_DIRECTORY = '/Users/korouf/Desktop/TEXAS'
 class OpenSecondPage:
     def __init__(self, key):
         self.key = key
+        self.createFolder()
+
+    def createFolder(self):
+        if os.path.exists(self.key) == False:
+            os.makedirs("pdf/"+self.key)
+
+    # TODO: Find a way to change default downloading folder of already existing browser
+    def changeBrowserSettings(self):
+        options = ChromeOptions()
+        profile = { "plugins.plugins_disabled" : "Chrome PDF Viewer",  # Disable Chrome's PDF Viewer
+                    "download.default_directory": '/Users/frozmannik/PycharmProjects/TexasScrape/pdf/'+self.key,
+                    "plugins.always_open_pdf_externally": True,
+                    "download.extensions_to_open": "applications/pdf/"+self.key}
+        options.add_experimental_option("prefs", profile)
+        browser = Chrome('files/chromedriver', chrome_options=options)
+        return browser
+
+    def checkDownload(self):
+        print("HERE")
+        print(os.listdir("pdf/{}".format(self.key)))
+
 
     def open_second_page(self, browser):
         try:
             browser.get("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
+            self.createFolder()
+            browser = self.changeBrowserSettings() # change browser settings( new downloading path)
+            self.checkDownload()
         except Exception as err:
             print(str(err))
         try:  # docSearchButton
@@ -58,10 +83,16 @@ class OpenSecondPage:
                         time.sleep(3)
                         WebDriverWait(browser, 30).until(
                             EC.presence_of_element_located((By.ID, 'downloadAllButton'))).click()
-                        time.sleep(3)
+                        time.sleep(2)
+
+                        self.checkDownload() # check if file downloading
+                        browser.switch_to.window(browser.window_handles[1])
+                        browser.close()
+                        browser.switch_to.window(browser.window_handles[0])
                         WebDriverWait(browser, 30).until(
                             EC.presence_of_element_located((By.ID, 'closeDoc2'))).click()
                         time.sleep(2)
+
             print(download_ids)
             WebDriverWait(browser, 30)
         except Exception as error:
