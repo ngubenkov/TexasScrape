@@ -24,8 +24,8 @@ if __name__ == '__main__':
     browser = browser_setup(DEFAULT_DOWNLOAD_DIRECTORY)
     #first_page = stage2.Stage2('MARTIN', '37 T2N', '36', browser)
     #leaseIDs = first_page.open_page()
-    #leaseIDs = {'21893', '38582', '35729'}
-    leaseIDs = {'21893'}
+    leaseIDs = {'21893', '38582', '35729'}
+    #leaseIDs = {'21893'}
     print(leaseIDs)
     for id in leaseIDs:
         second_page = stage3.OpenSecondPage(id)

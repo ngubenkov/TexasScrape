@@ -21,14 +21,10 @@ class OpenSecondPage:
     # TODO: it works but why???
     def checkDownload(self):
         while True:
-            print(os.listdir("pdf"))
             if any(".crdownload" in s for s in os.listdir("pdf")):
                 time.sleep(2)
-                return True
             else:
                 break
-
-
 
     def open_second_page(self, browser):
         try:
@@ -85,8 +81,6 @@ class OpenSecondPage:
                         WebDriverWait(browser, 30).until(
                             EC.presence_of_element_located((By.ID, 'closeDoc2'))).click()
                         time.sleep(2)
-
-            print(download_ids)
             WebDriverWait(browser, 30)
         except Exception as error:
             print(str(error))

@@ -180,7 +180,6 @@ class Stage2:
                     self.leaseIDs.add(id)
                 print("TABLE SCRAPED SUCCESSFULLY {}".format(count))
 
-
             except Exception as e:
                 print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {} : {}".format(count, str(e)))
 

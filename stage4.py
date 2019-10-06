@@ -2,28 +2,36 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import pyscreenshot as ImageGrab
+import os
 
 class Stage4:
     def __init__(self, browser, id):
         self.browser = browser
         self.id = id
+        self.createScreenshot()
 
-    def screenshot(self):
+    def createScreenshot(self):
+        if os.path.exists("screenshots") == False:
+            os.makedirs("screenshots")
+
+    def screenshot(self, name):
         im = ImageGrab.grab()
-        im.save('screenshots/leaseID_{}.png'.format(str(self.id)))
-        im.show()
+        im.save('screenshots/leaseID_{}_{}.png'.format(str(self.id), name))
 
-    def stage4(self):
-        self.browser.get('http://webapps.rrc.texas.gov/CMPL/publicSearchAction.do?formData.methodHndlr.inputValue =init&formData.headerTabSelected=home&formData.pageForwardHndlr.inputValue=home')
-        WebDriverWait(self.browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="leaseNoArgHndlr:12"]'))).send_keys(self.id)  # Block
-        WebDriverWait(self.browser, 30).until(EC.presence_of_element_located((By.XPATH, '/html/body/table[6]/tbody/tr/td/form/table/tbody/tr[4]/td/table/tbody/tr[5]/td/table/tbody/tr/td/input[1]'))).click()
-        #screenshot(self.id)
-        recordsFoundLinks = self.scrapeTable()
-        for record in recordsFoundLinks:
-            details = self.scrapeDetails(record)
-            for detail in details:
-                self.browser.get(detail[1])
-            print("click to go to next detail")
+    def stage4(self): # may be a case when there is no data about this lease id
+        try:
+            self.browser.get('http://webapps.rrc.texas.gov/CMPL/publicSearchAction.do?formData.methodHndlr.inputValue =init&formData.headerTabSelected=home&formData.pageForwardHndlr.inputValue=home')
+            WebDriverWait(self.browser, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="leaseNoArgHndlr:12"]'))).send_keys(self.id)  # Block
+            WebDriverWait(self.browser, 30).until(EC.presence_of_element_located((By.XPATH, '/html/body/table[6]/tbody/tr/td/form/table/tbody/tr[4]/td/table/tbody/tr[5]/td/table/tbody/tr/td/input[1]'))).click()
+            self.screenshot("records")
+            recordsFoundLinks = self.scrapeTable()
+            for record in recordsFoundLinks:
+                details = self.scrapeDetails(record)
+                for detail in details:
+                    self.browser.get(detail[1])
+        except Exception as e:
+            print("No such leaseID : {} ".format(str(e)))
+            pass
 
 
     def scrapeTable(self):
@@ -39,6 +47,7 @@ class Stage4:
     def scrapeDetails(self, url):
         self.browser.get(url)
         table = WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/table[6]/tbody/tr/td/form/table/tbody/tr/td/table[2]/tbody/tr[2]/td[1]/table/tbody/tr[2]/td/table/tbody')))
+        self.screenshot("summary")
         rows = table.find_elements_by_tag_name('tr')
         attachments = []
 
