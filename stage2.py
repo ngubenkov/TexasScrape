@@ -1,8 +1,9 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from collections import OrderedDict
 import pyscreenshot as ImageGrab
-from tableScrape import scrapeTable
+from tableScrape import scrapeTable, save_well_attribute
 import time
 from selenium.webdriver.common.action_chains import ActionChains
 import os
@@ -19,6 +20,7 @@ class Stage2:
         self.browser = browser
         self.mainFolder = self.country + "_" + self.block + "_" + self.section
         self.wells = []
+        self.wellCount = 1
 
     def open_page(self):
         '''
@@ -180,22 +182,17 @@ class Stage2:
         tbodys = WebDriverWait(browser, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'esriPopupWrapper'))).find_elements_by_tag_name('tbody')
         print("FOUND POP UP ")
-        count = 0
-        tempL, tempR = None,None
+        dict_table = OrderedDict()
         for item in tbodys:
-            count += 1
             try:
                 tableContent = item.get_attribute('innerHTML')
-                if count==1:
-                    tempL,tempR = scrapeTable(tableContent, self.mainFolder)
-                else:
-                    id = scrapeTable(tableContent, self.mainFolder,tempL,tempR)
-                    self.leaseIDs.add(id)
-                print("TABLE SCRAPED SUCCESSFULLY {}".format(count))
-
+                dict_table = scrapeTable(tableContent, dict_table)
             except Exception as e:
-                print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {} exception : {}".format(count, str(e)))
-
+                print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table exception : {}".format(str(e)))
+        saving_folder = self.mainFolder + "/" + str(self.wellCount)
+        save_well_attribute(saving_folder, dict_table)
+        self.leaseIDs.add(dict_table['LEASE/ID'])
+        self.wellCount += 1
         while True:
             try:
                 WebDriverWait(browser, 10).until(  # close form
