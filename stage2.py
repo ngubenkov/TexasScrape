@@ -186,6 +186,7 @@ class Stage2:
         for item in tbodys:
             try:
                 tableContent = item.get_attribute('innerHTML')
+                time.sleep(1)
                 dict_table = scrapeTable(tableContent, dict_table)
             except Exception as e:
                 print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table exception : {}".format(str(e)))
