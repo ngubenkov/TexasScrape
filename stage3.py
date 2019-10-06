@@ -15,31 +15,25 @@ class OpenSecondPage:
         self.createFolder()
 
     def createFolder(self):
-        if os.path.exists(self.key) == False:
-            os.makedirs("pdf/"+self.key)
+        if os.path.exists("pdf") == False:
+            os.makedirs("pdf")
 
-    # TODO: Find a way to change default downloading folder of already existing browser
-    def changeBrowserSettings(self):
-        options = ChromeOptions()
-        profile = { "plugins.plugins_disabled" : "Chrome PDF Viewer",  # Disable Chrome's PDF Viewer
-                    "download.default_directory": '/Users/frozmannik/PycharmProjects/TexasScrape/pdf/'+self.key,
-                    "plugins.always_open_pdf_externally": True,
-                    "download.extensions_to_open": "applications/pdf/"+self.key}
-        options.add_experimental_option("prefs", profile)
-        browser = Chrome('files/chromedriver', chrome_options=options)
-        return browser
-
+    # TODO: it works but why???
     def checkDownload(self):
-        print("HERE")
-        print(os.listdir("pdf/{}".format(self.key)))
+        while True:
+            print(os.listdir("pdf"))
+            if any(".crdownload" in s for s in os.listdir("pdf")):
+                time.sleep(2)
+                return True
+            else:
+                break
+
 
 
     def open_second_page(self, browser):
         try:
             browser.get("https://rrcsearch3.neubus.com/esd3-rrc/index.php?profile=17")
             self.createFolder()
-            browser = self.changeBrowserSettings() # change browser settings( new downloading path)
-            self.checkDownload()
         except Exception as err:
             print(str(err))
         try:  # docSearchButton
@@ -83,8 +77,7 @@ class OpenSecondPage:
                         time.sleep(3)
                         WebDriverWait(browser, 30).until(
                             EC.presence_of_element_located((By.ID, 'downloadAllButton'))).click()
-                        time.sleep(2)
-
+                        time.sleep(4)
                         self.checkDownload() # check if file downloading
                         browser.switch_to.window(browser.window_handles[1])
                         browser.close()

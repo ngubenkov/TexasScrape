@@ -3,9 +3,40 @@
   <component name="ChangeListManager">
     <list default="true" id="35752d20-9cca-425c-85b9-979bda3120d0" name="Default Changelist" comment="google upload">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/9e786d3ad71708e2581b54ab27e6f8c9_1569945472.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/1/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/1/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/10/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/10/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/11/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/11/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/12/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/12/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/13/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/13/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/14/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/14/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/2/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/2/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/3/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/3/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/4/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/4/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/5/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/5/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/6/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/6/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/7/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/7/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/8/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/8/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/9/OPERATOR_WELLBORE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/9/Result #1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARTIN_37_T2N_36/screenshots/MARTIN_37 T2N_36.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/038fc07401869de76ca1b78c18a8a53d_1570300564.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/47ead649919b40e6890f7a7e1cb85a79_1570301235.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/47ead649919b40e6890f7a7e1cb85a79_1570301658.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/stage3.py" beforeDir="false" afterPath="$PROJECT_DIR$/stage3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stage4.py" beforeDir="false" afterPath="$PROJECT_DIR$/stage4.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="14" column="59" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
+            <state relative-caret-position="178">
+              <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -30,8 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stage4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-64">
-              <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+            <state relative-caret-position="257">
+              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
               </folding>
@@ -42,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stage2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="54" selection-end-column="40" />
+            <state relative-caret-position="149">
+              <caret line="186" column="22" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="22" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
               </folding>
@@ -54,8 +85,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stage3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+            <state relative-caret-position="222">
+              <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
               </folding>
@@ -66,8 +97,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tableScrape.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
+            <state relative-caret-position="60">
+              <caret line="4" column="48" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="48" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -104,6 +135,8 @@
       <find>leaseIDs</find>
       <find>DEFAULT_DOWNLOAD_DIRECTORY</find>
       <find>scrapeTable</find>
+      <find>mainFolder</find>
+      <find>wellCount</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -121,15 +154,15 @@
         <option value="$PROJECT_DIR$/upload_files.py" />
         <option value="$PROJECT_DIR$/stage2.py" />
         <option value="$PROJECT_DIR$/tableScrape.py" />
-        <option value="$PROJECT_DIR$/stage4.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/stage4.py" />
         <option value="$PROJECT_DIR$/stage3.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="101" />
-    <option name="y" value="25" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="667" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="798" />
   </component>
@@ -146,11 +179,6 @@
             <path>
               <item name="TexasScrape" type="b2602c69:ProjectViewProjectNode" />
               <item name="TexasScrape" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TexasScrape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TexasScrape" type="462c0819:PsiDirectoryNode" />
-              <item name="pdf" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -340,7 +368,7 @@
       <workItem from="1568004191764" duration="465000" />
       <workItem from="1568477359437" duration="12981000" />
       <workItem from="1568551205053" duration="24896000" />
-      <workItem from="1570292026822" duration="7825000" />
+      <workItem from="1570292026822" duration="12158000" />
     </task>
     <task id="LOCAL-00001" summary="drivers are addded and example(mb useful) code">
       <created>1564773528122</created>
@@ -423,7 +451,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146334000" />
+    <option name="totallyTimeSpent" value="150667000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -435,24 +463,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="798" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17310444" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.39484978" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32650602" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" weight="0.51699716" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.46600565" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.398017" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="TODO" order="6" visible="true" weight="0.32771084" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32771084" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4990177" weight="0.32859176" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50143063" side_tool="true" weight="0.45609066" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4985694" weight="0.21084337" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4985694" weight="0.24787535" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
@@ -506,7 +534,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TexasScrape$stage3.coverage" NAME="stage3 Coverage Results" MODIFIED="1565881945283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TexasScrape$upload_files.coverage" NAME="upload_files Coverage Results" MODIFIED="1568479232039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TexasScrape$main.coverage" NAME="main Coverage Results" MODIFIED="1570301529490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TexasScrape$main.coverage" NAME="main Coverage Results" MODIFIED="1570376229454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TexasScrape$google.coverage" NAME="google Coverage Results" MODIFIED="1567962003468" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TexasScrape$tableScrape.coverage" NAME="tableScrape Coverage Results" MODIFIED="1565097119294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TexasScrape$findWells.coverage" NAME="findWells Coverage Results" MODIFIED="1565086007054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -590,30 +618,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tableScrape.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
+    <entry file="file://$PROJECT_DIR$/MARTIN_37_T2N_36/1/OPERATOR_WELLBORE.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stage2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="54" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/stage4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-64">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+        <state relative-caret-position="257">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
           </folding>
@@ -622,18 +636,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="14" column="59" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
+        <state relative-caret-position="178">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/stage2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="186" column="22" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tableScrape.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="48" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/stage3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+        <state relative-caret-position="222">
+          <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
           </folding>
