@@ -13,7 +13,7 @@ page_counter = 1
 
 def browser_setup():
     chromeOptions = webdriver.ChromeOptions()
-    prefs = {"download.default_directory": "/Users/frozmannik/Desktop/TEXAS"}
+    prefs = {"download.default_directory": "/Users/{}/Desktop/TEXAS".format(os.getlogin())}
     chromeOptions.add_experimental_option("prefs", prefs)
 
     browser = webdriver.Chrome(executable_path = 'files/chromedriver.dms',

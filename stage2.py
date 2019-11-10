@@ -1,8 +1,9 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from collections import OrderedDict
 import pyscreenshot as ImageGrab
-from tableScrape import scrapeTable
+from tableScrape import scrapeTable, save_well_attribute
 import time
 from selenium.webdriver.common.action_chains import ActionChains
 import os
@@ -16,9 +17,9 @@ class Stage2:
         self.section = section
         self.leaseIDs = set()
         self.browser = browser
-        self.mainFolder = (self.country+"_"+self.block+"_"+self.section)
-        self.mainFolder=self.mainFolder.replace(' ', '_')
+        self.mainFolder = self.country + "_" + self.block + "_" + self.section
         self.wells = []
+        self.wellCount = 1
 
     def open_page(self):
         '''
@@ -89,11 +90,12 @@ class Stage2:
                     EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
                 br = descriptionForm.find_element(By.CLASS_NAME, "dijitTooltipFocusNode")
                 if '"{}"'.format(self.section) in br.text[br.text.find('Lease Name :'):br.text.find('On Schedule :')]:
-                    print("FOUND ")
-                    input()
-                    image.click()
-                    time.sleep(3)
-                    self.scrapePopUp(browser, image)
+                    #image.click()
+                    #time.sleep(3)
+                    print("HOVERED CORRECT")
+                    wells += 1
+                    self.wells.append(image)
+                    #self.scrapePopUp(browser, image)
 
             except Exception as e:
                 print("Potensial correct : {}".format(e))
@@ -120,11 +122,9 @@ class Stage2:
                 descriptionForm = WebDriverWait(browser, 2).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
                 br = descriptionForm.find_element(By.CLASS_NAME,"dijitTooltipFocusNode")
                 if br:
-                    print("FOUND ")
                     wells += 1
                     image.click()
                     time.sleep(3)
-                    print("HERE")
                     self.scrapePopUp(browser,image)
 
             except Exception as e:
@@ -151,12 +151,10 @@ class Stage2:
                 descriptionForm = WebDriverWait(browser, 2).until(EC.presence_of_element_located((By.CLASS_NAME, 'dijitTooltipContainer')))
                 br = descriptionForm.find_element(By.CLASS_NAME,"dijitTooltipFocusNode")
                 if '"{}"'.format(self.section) in br.text[br.text.find('Lease Name :'):br.text.find('On Schedule :')]:
-                    print("FOUND ")
-                    print(str(ind))
                     wells += 1
                     image.click()
                     time.sleep(3)
-                    self.scrapePopUp(browser,image,ind)
+                    self.scrapePopUp(browser,image)
 
             except Exception as e:
                 print("Acceptable shit happened : {}".format(e))
@@ -164,32 +162,38 @@ class Stage2:
             ind = ind+1
         print("TOTAL WELLS {}".format(wells))
 
-    def scrapePopUp(self, browser,image,ind):
+    def scrapePopUp(self, browser,image):
         tbodys = WebDriverWait(browser, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'esriPopupWrapper'))).find_elements_by_tag_name('tbody')
-        print("FOUND POP UP " )
-        print(ind)
         count = 0
+        dict_table = OrderedDict()
         for item in tbodys:
             count += 1
             try:
                 tableContent = item.get_attribute('innerHTML')
-                id = scrapeTable(tableContent, self.mainFolder, ind)
-                if id != None:
-                    self.leaseIDs.add(id)
-                print("TABLE SCRAPED SUCCESSFULLY {}".format(count))
-
+                time.sleep(1)
+                dict_table = scrapeTable(tableContent, dict_table)
             except Exception as e:
-                print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table {} : {}".format(count, e))
+                print("NON ACCEPTABLE SHIT HAPPENED CANT SCRAPE Table exception : {}".format(str(e)))
+        saving_folder = self.mainFolder + "/" + str(self.wellCount)
+        save_well_attribute(saving_folder, dict_table)
+        self.leaseIDs.add(dict_table['LEASE/ID'])
+        self.wellCount += 1
 
-        while True:
-            try:
-                WebDriverWait(browser, 10).until(  # close form
-                    EC.presence_of_element_located(
-                        (By.XPATH, '//*[@id="rrcGisViewerMap_root"]/div[3]/div[1]/div[1]/div/div[6]'))).click()
-                break
-            except:
-                print("cant close pop up (PROBABLY MOVE MOUSE A BIT)")
-                ac = ActionChains(browser)
-                ac.move_to_element(image).move_by_offset(5, 5).click().perform()
-                break
+        time.sleep(10)
+        print("cant close pop up (PROBABLY MOVE MOUSE A BIT)")
+        ac = ActionChains(browser)
+        ac.move_to_element(image).move_by_offset(5, 5).click().perform()
+        time.sleep(2)
+
+       # while True:
+                # try:
+                #     WebDriverWait(browser, 5).until(  # close form
+                #         EC.presence_of_element_located(
+                #             (By.XPATH, '//*[@id="rrcGisViewerMap_root"]/div[3]/div[1]/div[1]/div/div[6]'))).click()
+                #     break
+                # except:
+                #     print("cant close pop up (PROBABLY MOVE MOUSE A BIT)")
+                #     ac = ActionChains(browser)
+                #     ac.move_to_element(image).move_by_offset(5, 5).click().perform()
+                #     break

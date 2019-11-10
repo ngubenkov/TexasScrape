@@ -5,7 +5,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 from main import browser_setup
 
-DEFAULT_DOWNLOAD_DIRECTORY = '/Users/korouf/Desktop/TEXAS'
+import os
+DEFAULT_DOWNLOAD_DIRECTORY = '/Users/{}/Desktop/TEXAS'.format(os.getlogin())
 
 
 class OpenSecondPage:
